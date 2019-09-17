@@ -1,0 +1,752 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TripsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="SuperShuttleID" Type="varchar" MaxLength="50" />
+          <Property Name="DefaultVanId" Type="int" />
+          <Property Name="DriverShare1" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="DriverShare2" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="ExceptionMessage" Type="nvarchar(max)" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountName" Type="varchar" MaxLength="255" />
+          <Property Name="BookingId" Type="varchar" MaxLength="255" />
+          <Property Name="TaskId" Type="varchar" MaxLength="255" />
+          <Property Name="DispatchStatus" Type="varchar" MaxLength="255" />
+          <Property Name="DropOffAddress" Type="varchar" MaxLength="255" />
+          <Property Name="Pax" Type="varchar" MaxLength="255" />
+          <Property Name="FareType" Type="varchar" MaxLength="255" />
+          <Property Name="PaymentType" Type="varchar" MaxLength="255" />
+          <Property Name="PickupAddress" Type="varchar" MaxLength="255" />
+          <Property Name="pickupTime" Type="varchar" MaxLength="255" />
+          <Property Name="RetailFare" Type="varchar" MaxLength="255" />
+          <Property Name="ServiceTime" Type="varchar" MaxLength="255" />
+          <Property Name="TravellerSurname" Type="varchar" MaxLength="255" />
+          <Property Name="VehicleNumber" Type="varchar" MaxLength="255" />
+          <Property Name="AirportFee" Type="varchar" MaxLength="255" />
+          <Property Name="Fee" Type="varchar" MaxLength="255" />
+          <Property Name="Bbucode" Type="varchar" MaxLength="255" />
+          <Property Name="DriverId" Type="varchar" MaxLength="255" />
+          <Property Name="Run" Type="varchar" MaxLength="255" />
+          <Property Name="ServiceType" Type="varchar" MaxLength="255" />
+          <Property Name="TotalFare" Type="varchar" MaxLength="255" />
+          <Property Name="ImportDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskMasterList">
+          <Key>
+            <PropertyRef Name="BookingId" />
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="AccountName" Type="varchar" MaxLength="255" />
+          <Property Name="BookingId" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TaskId" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DispatchStatus" Type="varchar" MaxLength="255" />
+          <Property Name="DropOffAddress" Type="varchar" MaxLength="255" />
+          <Property Name="Pax" Type="varchar" MaxLength="255" />
+          <Property Name="FareType" Type="varchar" MaxLength="255" />
+          <Property Name="PaymentType" Type="varchar" MaxLength="255" />
+          <Property Name="PickupAddress" Type="varchar" MaxLength="255" />
+          <Property Name="pickupTime" Type="datetime" />
+          <Property Name="RetailFare" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ServiceTime" Type="datetime" />
+          <Property Name="TravellerSurname" Type="varchar" MaxLength="255" />
+          <Property Name="VehicleNumber" Type="varchar" MaxLength="255" />
+          <Property Name="AirportFee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Bbucode" Type="varchar" MaxLength="255" />
+          <Property Name="DriverId" Type="varchar" MaxLength="255" />
+          <Property Name="Run" Type="varchar" MaxLength="255" />
+          <Property Name="ServiceType" Type="varchar" MaxLength="255" />
+          <Property Name="TotalFare" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ImportDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TripSheet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DriverID" Type="int" Nullable="false" />
+          <Property Name="VanID" Type="int" Nullable="false" />
+          <Property Name="StartKM" Type="int" Nullable="false" />
+          <Property Name="EndKM" Type="int" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="Duration" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="Swipes" Type="tinyint" />
+          <Property Name="Trips" Type="tinyint" />
+          <Property Name="TaxiChit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CCEFTPOS" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PrePaid" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Cash" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="DriverID" Type="int" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Admin" Type="bit" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Van">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Trips.dbo.SuperShuttleView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SuperShuttleView">
+          <Key>
+            <PropertyRef Name="BookingId" />
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="BookingId" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TaskId" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="pickupTime" Type="datetime" />
+          <Property Name="PickupDate" Type="varchar" MaxLength="30" />
+          <Property Name="PickupAddress" Type="varchar" MaxLength="255" />
+          <Property Name="DropOffAddress" Type="varchar" MaxLength="255" />
+          <Property Name="TravellerSurname" Type="varchar" MaxLength="255" />
+          <Property Name="VehicleNumber" Type="varchar" MaxLength="255" />
+          <Property Name="Pax" Type="varchar" MaxLength="255" />
+          <Property Name="FareType" Type="varchar" MaxLength="255" />
+          <Property Name="PaymentType" Type="varchar" MaxLength="255" />
+          <Property Name="AirportFee" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Fee" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ServiceType" Type="varchar" MaxLength="255" />
+          <Property Name="RetailFare" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalFare" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="LessCharges" Type="decimal" Precision="24" Scale="2" />
+          <Property Name="GST" Type="decimal" Precision="30" Scale="6" />
+          <Property Name="NET" Type="decimal" Precision="31" Scale="6" />
+          <Property Name="DriverShare" Type="decimal" Precision="37" Scale="8" />
+          <Property Name="DriverId" Type="varchar" MaxLength="255" />
+          <Property Name="SuperShuttleID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="Get_Driver_Dashboard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SuperShuttleID" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Get_TripSheets_By_DriverID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DriverID" Type="int" Mode="In" />
+        </Function>
+      <Function Name="GetTripSheetByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+      <Parameter Name="UserId" Type="int" Mode="In" />
+      </Function>
+        <Function Name="InsertErrorLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ExceptionMessage" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="TransferNewTaskToTaskMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="TruncateTask" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ValidateTripSheetEntry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="VanID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ValidateTripSheetEntryBeforeSave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="VanID" Type="int" Mode="In" />
+          <Parameter Name="TripID" Type="int" Mode="In" />
+          <Parameter Name="Gross" Type="decimal" Mode="In" />
+          <Parameter Name="StartKM" Type="int" Mode="In" />
+          <Parameter Name="EndKM" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="TripsModelStoreContainer">
+          <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskMasterList" EntityType="Self.TaskMasterList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TripSheet" EntityType="Self.TripSheet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Van" EntityType="Self.Van" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuperShuttleView" EntityType="Self.SuperShuttleView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [SuperShuttleView].[BookingId] AS [BookingId],
+              [SuperShuttleView].[TaskId] AS [TaskId],
+              [SuperShuttleView].[pickupTime] AS [pickupTime],
+              [SuperShuttleView].[PickupDate] AS [PickupDate],
+              [SuperShuttleView].[PickupAddress] AS [PickupAddress],
+              [SuperShuttleView].[DropOffAddress] AS [DropOffAddress],
+              [SuperShuttleView].[TravellerSurname] AS [TravellerSurname],
+              [SuperShuttleView].[VehicleNumber] AS [VehicleNumber],
+              [SuperShuttleView].[Pax] AS [Pax],
+              [SuperShuttleView].[FareType] AS [FareType],
+              [SuperShuttleView].[PaymentType] AS [PaymentType],
+              [SuperShuttleView].[AirportFee] AS [AirportFee],
+              [SuperShuttleView].[AirportFee] AS [Fee],
+              [SuperShuttleView].[ServiceType] AS [ServiceType],
+              [SuperShuttleView].[RetailFare] AS [RetailFare],
+              [SuperShuttleView].[TotalFare] AS [TotalFare],
+              [SuperShuttleView].[LessCharges] AS [LessCharges],
+              [SuperShuttleView].[GST] AS [GST],
+              [SuperShuttleView].[NET] AS [NET],
+              [SuperShuttleView].[DriverShare] AS [DriverShare],
+              [SuperShuttleView].[DriverId] AS [DriverId],
+              [SuperShuttleView].[SuperShuttleID] AS [SuperShuttleID]
+              FROM [dbo].[SuperShuttleView] AS [SuperShuttleView]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TripsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SuperShuttleID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultVanId" Type="Int32" />
+          <Property Name="DriverShare1" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DriverShare2" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="TripSheets" Relationship="Self.FK_TripSheet_Driver" FromRole="Driver" ToRole="TripSheet" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Driver" FromRole="Driver" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BookingId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TaskId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DispatchStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DropOffAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Pax" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FareType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PickupAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="pickupTime" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RetailFare" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceTime" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TravellerSurname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="VehicleNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AirportFee" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Fee" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Bbucode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DriverId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Run" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TotalFare" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ImportDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="TaskMasterList">
+          <Key>
+            <PropertyRef Name="BookingId" />
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="AccountName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BookingId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TaskId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DispatchStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DropOffAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Pax" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FareType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PickupAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="pickupTime" Type="DateTime" Precision="3" />
+          <Property Name="RetailFare" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ServiceTime" Type="DateTime" Precision="3" />
+          <Property Name="TravellerSurname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="VehicleNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AirportFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Bbucode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DriverId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Run" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TotalFare" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ImportDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="TripSheet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DriverID" Type="Int32" Nullable="false" />
+          <Property Name="VanID" Type="Int32" Nullable="false" />
+          <Property Name="StartKM" Type="Int32" Nullable="false" />
+          <Property Name="EndKM" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="Duration" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="3" />
+          <Property Name="Swipes" Type="Byte" />
+          <Property Name="Trips" Type="Byte" />
+          <Property Name="TaxiChit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CCEFTPOS" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PrePaid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Cash" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK_TripSheet_Driver" FromRole="TripSheet" ToRole="Driver" />
+          <NavigationProperty Name="Van" Relationship="Self.FK_TripSheet_Van" FromRole="TripSheet" ToRole="Van" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DriverID" Type="Int32" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Admin" Type="Boolean" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK_User_Driver" FromRole="User" ToRole="Driver" />
+        </EntityType>
+        <EntityType Name="Van">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TripSheets" Relationship="Self.FK_TripSheet_Van" FromRole="Van" ToRole="TripSheet" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="ExceptionMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SuperShuttleView">
+          <Key>
+            <PropertyRef Name="BookingId" />
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="BookingId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TaskId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pickupTime" Type="DateTime" Precision="3" />
+          <Property Name="PickupAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DropOffAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TravellerSurname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="VehicleNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Pax" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FareType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RetailFare" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AirportFee" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fee" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ServiceType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LessCharges" Type="Decimal" Precision="24" Scale="2" />
+          <Property Name="GST" Type="Decimal" Precision="30" Scale="6" />
+          <Property Name="NET" Type="Decimal" Precision="31" Scale="6" />
+          <Property Name="DriverShare" Type="Decimal" Precision="37" Scale="8" />
+          <Property Name="DriverId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SuperShuttleID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PickupDate" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TotalFare" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK_TripSheet_Driver">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="1" />
+          <End Role="TripSheet" Type="Self.TripSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TripSheet">
+              <PropertyRef Name="DriverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Driver">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="DriverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TripSheet_Van">
+          <End Role="Van" Type="Self.Van" Multiplicity="1" />
+          <End Role="TripSheet" Type="Self.TripSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Van">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TripSheet">
+              <PropertyRef Name="VanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TripsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Drivers" EntityType="Self.Driver" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="TaskMasterLists" EntityType="Self.TaskMasterList" />
+          <EntitySet Name="TripSheets" EntityType="Self.TripSheet" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Vans" EntityType="Self.Van" />
+          <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLog" />
+          <EntitySet Name="SuperShuttleViews" EntityType="Self.SuperShuttleView" />
+          <AssociationSet Name="FK_TripSheet_Driver" Association="Self.FK_TripSheet_Driver">
+            <End Role="Driver" EntitySet="Drivers" />
+            <End Role="TripSheet" EntitySet="TripSheets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Driver" Association="Self.FK_User_Driver">
+            <End Role="Driver" EntitySet="Drivers" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TripSheet_Van" Association="Self.FK_TripSheet_Van">
+            <End Role="Van" EntitySet="Vans" />
+            <End Role="TripSheet" EntitySet="TripSheets" />
+          </AssociationSet>
+          <FunctionImport Name="Get_Driver_Dashboard" ReturnType="Collection(TripsModel.Get_Driver_Dashboard_Result)">
+          <Parameter Name="SuperShuttleID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Get_Driver_Dashboard_Details" ReturnType="Collection(TripsModel.Get_Driver_Dashboard_Details_Result)">
+            <Parameter Name="SuperShuttleID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Get_TripSheets_By_DriverID" EntitySet="TripSheets" ReturnType="Collection(TripsModel.TripSheet)">
+          <Parameter Name="DriverID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTripSheetByUserId" EntitySet="TripSheets" ReturnType="Collection(TripsModel.TripSheet)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getTaskMasterListForDateRange" ReturnType="Collection(TripsModel.getTaskMasterListForDateRange_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InsertErrorLog" ReturnType="Collection(Decimal)">
+            <Parameter Name="ExceptionMessage" Mode="In" Type="String" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TransferNewTaskToTaskMaster" />
+          <FunctionImport Name="TruncateTask" />
+          <FunctionImport Name="ValidateTripSheetEntry" ReturnType="Collection(String)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="VanID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ValidateTripSheetEntryBeforeSave" ReturnType="Collection(String)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="VanID" Mode="In" Type="Int32" />
+            <Parameter Name="TripID" Mode="In" Type="Int32" />
+            <Parameter Name="Gross" Mode="In" Type="Decimal" />
+            <Parameter Name="StartKM" Mode="In" Type="Int32" />
+            <Parameter Name="EndKM" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Get_Driver_Dashboard_Result">
+          <Property Type="String" Name="Period" Nullable="true" MaxLength="9" />
+          <Property Type="Decimal" Name="Gross" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="LessCharges" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="GST" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="Net" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="Driver_Share" Nullable="true" Precision="38" Scale="8" />
+          <Property Type="String" Name="SuperShuttleID" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Get_Driver_Dashboard_Details_Result">
+          <Property Type="String" Name="BookingId" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="TaskId" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="pickupTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="PickupAddress" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="DropOffAddress" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="TravellerSurname" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="VehicleNumber" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Pax" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="FareType" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="PaymentType" Nullable="true" MaxLength="255" />
+          <Property Type="Decimal" Name="RetailFare" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="AirportFee" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Fee" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="ServiceType" Nullable="true" MaxLength="255" />
+          <Property Type="Decimal" Name="Net" Nullable="true" Precision="32" Scale="6" />
+          <Property Type="Decimal" Name="DriverShare" Nullable="true" Precision="38" Scale="8" />
+          <Property Type="String" Name="DriverId" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="Get_TripSheets_By_DriverID_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="DriverID" Nullable="false" />
+          <Property Type="Int32" Name="VanID" Nullable="false" />
+          <Property Type="Int32" Name="StartKM" Nullable="false" />
+          <Property Type="Int32" Name="EndKM" Nullable="true" />
+          <Property Type="DateTime" Name="StartTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Duration" Nullable="true" Precision="23" />
+          <Property Type="Byte" Name="Swipes" Nullable="true" />
+          <Property Type="Byte" Name="Trips" Nullable="true" />
+          <Property Type="Decimal" Name="TaxiChit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CCEFTPOS" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PrePaid" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Cash" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="GetTripSheetByUserId_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="DriverID" Nullable="false" />
+          <Property Type="String" Name="Driver" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="VanID" Nullable="false" />
+          <Property Type="Int32" Name="StartKM" Nullable="false" />
+          <Property Type="Int32" Name="EndKM" Nullable="true" />
+          <Property Type="DateTime" Name="StartTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Duration" Nullable="true" Precision="23" />
+          <Property Type="Byte" Name="Swipes" Nullable="true" />
+          <Property Type="Byte" Name="Trips" Nullable="true" />
+          <Property Type="Decimal" Name="TaxiChit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CCEFTPOS" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PrePaid" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Cash" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+          
+        </ComplexType>
+        <ComplexType Name="getTaskMasterListForDateRange_Result">
+          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="BookingId" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="TaskId" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="DispatchStatus" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="DropOffAddress" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Pax" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="FareType" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="PaymentType" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="PickupAddress" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="pickupTime" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="RetailFare" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="ServiceTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TravellerSurname" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="VehicleNumber" Nullable="true" MaxLength="255" />
+          <Property Type="Decimal" Name="AirportFee" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Fee" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Bbucode" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="DriverId" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Run" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="ServiceType" Nullable="true" MaxLength="255" />
+          <Property Type="Decimal" Name="TotalFare" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="ImportDate" Nullable="false" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TripsModelStoreContainer" CdmEntityContainer="TripsEntities">
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="TripsModel.Driver">
+              <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="SuperShuttleID" ColumnName="SuperShuttleID" />
+                <ScalarProperty Name="DefaultVanId" ColumnName="DefaultVanId" />
+                <ScalarProperty Name="DriverShare1" ColumnName="DriverShare1" />
+                <ScalarProperty Name="DriverShare2" ColumnName="DriverShare2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="TripsModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="DispatchStatus" ColumnName="DispatchStatus" />
+                <ScalarProperty Name="DropOffAddress" ColumnName="DropOffAddress" />
+                <ScalarProperty Name="Pax" ColumnName="Pax" />
+                <ScalarProperty Name="FareType" ColumnName="FareType" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="PickupAddress" ColumnName="PickupAddress" />
+                <ScalarProperty Name="pickupTime" ColumnName="pickupTime" />
+                <ScalarProperty Name="RetailFare" ColumnName="RetailFare" />
+                <ScalarProperty Name="ServiceTime" ColumnName="ServiceTime" />
+                <ScalarProperty Name="TravellerSurname" ColumnName="TravellerSurname" />
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="AirportFee" ColumnName="AirportFee" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="Bbucode" ColumnName="Bbucode" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+                <ScalarProperty Name="Run" ColumnName="Run" />
+                <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
+                <ScalarProperty Name="TotalFare" ColumnName="TotalFare" />
+                <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskMasterLists">
+            <EntityTypeMapping TypeName="TripsModel.TaskMasterList">
+              <MappingFragment StoreEntitySet="TaskMasterList">
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="DispatchStatus" ColumnName="DispatchStatus" />
+                <ScalarProperty Name="DropOffAddress" ColumnName="DropOffAddress" />
+                <ScalarProperty Name="Pax" ColumnName="Pax" />
+                <ScalarProperty Name="FareType" ColumnName="FareType" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="PickupAddress" ColumnName="PickupAddress" />
+                <ScalarProperty Name="pickupTime" ColumnName="pickupTime" />
+                <ScalarProperty Name="RetailFare" ColumnName="RetailFare" />
+                <ScalarProperty Name="ServiceTime" ColumnName="ServiceTime" />
+                <ScalarProperty Name="TravellerSurname" ColumnName="TravellerSurname" />
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="AirportFee" ColumnName="AirportFee" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="Bbucode" ColumnName="Bbucode" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+                <ScalarProperty Name="Run" ColumnName="Run" />
+                <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
+                <ScalarProperty Name="TotalFare" ColumnName="TotalFare" />
+                <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripSheets">
+            <EntityTypeMapping TypeName="TripsModel.TripSheet">
+              <MappingFragment StoreEntitySet="TripSheet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+                <ScalarProperty Name="VanID" ColumnName="VanID" />
+                <ScalarProperty Name="StartKM" ColumnName="StartKM" />
+                <ScalarProperty Name="EndKM" ColumnName="EndKM" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Swipes" ColumnName="Swipes" />
+                <ScalarProperty Name="Trips" ColumnName="Trips" />
+                <ScalarProperty Name="TaxiChit" ColumnName="TaxiChit" />
+                <ScalarProperty Name="CCEFTPOS" ColumnName="CCEFTPOS" />
+                <ScalarProperty Name="PrePaid" ColumnName="PrePaid" />
+                <ScalarProperty Name="Cash" ColumnName="Cash" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TripsModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vans">
+            <EntityTypeMapping TypeName="TripsModel.Van">
+              <MappingFragment StoreEntitySet="Van">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="TripsModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ExceptionMessage" ColumnName="ExceptionMessage" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuperShuttleViews">
+            <EntityTypeMapping TypeName="TripsModel.SuperShuttleView">
+              <MappingFragment StoreEntitySet="SuperShuttleView">
+                <ScalarProperty Name="TotalFare" ColumnName="TotalFare" />
+                <ScalarProperty Name="PickupDate" ColumnName="PickupDate" />
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="pickupTime" ColumnName="pickupTime" />
+                <ScalarProperty Name="PickupAddress" ColumnName="PickupAddress" />
+                <ScalarProperty Name="DropOffAddress" ColumnName="DropOffAddress" />
+                <ScalarProperty Name="TravellerSurname" ColumnName="TravellerSurname" />
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="Pax" ColumnName="Pax" />
+                <ScalarProperty Name="FareType" ColumnName="FareType" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="RetailFare" ColumnName="RetailFare" />
+                <ScalarProperty Name="AirportFee" ColumnName="AirportFee" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
+                <ScalarProperty Name="LessCharges" ColumnName="LessCharges" />
+                <ScalarProperty Name="GST" ColumnName="GST" />
+                <ScalarProperty Name="NET" ColumnName="NET" />
+                <ScalarProperty Name="DriverShare" ColumnName="DriverShare" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+                <ScalarProperty Name="SuperShuttleID" ColumnName="SuperShuttleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Get_Driver_Dashboard" FunctionName="TripsModel.Store.Get_Driver_Dashboard">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TripsModel.Get_Driver_Dashboard_Result">
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="Gross" ColumnName="Gross" />
+                <ScalarProperty Name="LessCharges" ColumnName="LessCharges" />
+                <ScalarProperty Name="GST" ColumnName="GST" />
+                <ScalarProperty Name="Net" ColumnName="Net" />
+                <ScalarProperty Name="Driver_Share" ColumnName="Driver Share" />
+                <ScalarProperty Name="SuperShuttleID" ColumnName="SuperShuttleID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_TripSheets_By_DriverID" FunctionName="TripsModel.Store.Get_TripSheets_By_DriverID">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTripSheetByUserId" FunctionName="TripsModel.Store.GetTripSheetByUserId">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertErrorLog" FunctionName="TripsModel.Store.InsertErrorLog" />
+          <FunctionImportMapping FunctionImportName="TransferNewTaskToTaskMaster" FunctionName="TripsModel.Store.TransferNewTaskToTaskMaster" />
+          <FunctionImportMapping FunctionImportName="TruncateTask" FunctionName="TripsModel.Store.TruncateTask" />
+          <FunctionImportMapping FunctionImportName="ValidateTripSheetEntry" FunctionName="TripsModel.Store.ValidateTripSheetEntry" />
+          <FunctionImportMapping FunctionImportName="ValidateTripSheetEntryBeforeSave" FunctionName="TripsModel.Store.ValidateTripSheetEntryBeforeSave" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

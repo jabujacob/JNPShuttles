@@ -1,0 +1,215 @@
+﻿@model IEnumerable<JNPPortal.Models.Tripsheet>
+
+@{
+    ViewBag.Title = "Trip Sheets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section ScriptsOrCss
+{
+
+    <link href="~/Content/DataTable/new/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/DataTable/new/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/dataTables.buttons.min.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/jszip.min.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/pdfmake.min.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/vfs_fonts.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/buttons.html5.min.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/buttons.colVis.min.js"></script>
+    <link href="~/Content/DataTable/new/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/DataTable/new/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+
+}
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+        <small> @ViewBag.Title</small>
+    </h1>
+</section>
+
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-solid box-primary">
+
+                <div class="box-body">
+                    <!-- Split button -->
+                    <div class="margin">
+
+                        <div class="btn-group">
+                            <a href="@Url.Action("AddorEdit","TripSheets")" class="btn btn-primary">Create</a>
+                        </div>
+                    </div>
+                    <!-- flat split buttons -->
+                </div><!-- /.box-body -->
+            </div>
+            <div class="box box-solid box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">@ViewBag.Title</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive">
+
+                    <div class="margin">
+
+                        <div class="streaming-table">
+                            <span id="found" class="label label-info"></span>
+
+
+                            <table id="tbTripSheets" class="display nowrap">
+                                <thead>
+                                    <tr>
+                                        <th> @Html.DisplayNameFor(model => model.ID) </th>
+                                        <th> @Html.DisplayNameFor(model => model.Van) </th>
+                                        <th> @Html.DisplayNameFor(model => model.Driver) </th>
+                                        <th> @Html.DisplayNameFor(model => model.StartTime) </th>
+                                        <th> @Html.DisplayNameFor(model => model.EndTime) </th>
+                                        <th> @Html.DisplayNameFor(model => model.Trips) </th>
+                                        <th> @Html.DisplayNameFor(model => model.Swipes) </th>
+                                        <th> @Html.DisplayNameFor(model => model.PrePaid) </th>
+                                        <th> @Html.DisplayNameFor(model => model.Cash) </th>
+                                        <th> @Html.DisplayNameFor(model => model.CCEFTPOS) </th>
+                                        <th> @Html.DisplayNameFor(model => model.TaxiChit) </th>
+                                        <th> @Html.DisplayNameFor(model => model.Gross) </th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            <div id="summary">
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-solid box-primary">
+
+                <div class="box-body">
+                    <!-- Split button -->
+                    <div class="margin">
+
+                        <div class="btn-group">
+                            <a href="@Url.Action("AddorEdit","User")" class="btn btn-primary">Create</a>
+                        </div>
+                    </div>
+                    <!-- flat split buttons -->
+                </div><!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+
+    
+    $(document).ready(function () {
+
+        $("#tbTripSheets").dataTable(
+
+            {
+                "ajax": {
+
+                    "url": "/tripsheets/getgrid",
+                    "type": "GET",
+                    "dataType": "json"
+                },
+
+                "columns": [
+                    {
+                        "data": "ID", "render": function  (data)
+                        {
+                            return "<a href = '@Url.Action("AddorEdit","TripSheets")/" + data + "')>" + data + "</a>";
+                        },
+
+                    },
+                    {
+                        "data": "Van", "render": function (data, type, row)
+                        {
+                            return "<a href = '@Url.Action("AddorEdit","User")/" + row['ID'] + "')>" + data + "</a>";
+                        },
+                    },
+                    {
+                        "data": "Driver", "render": function (data,type,row)
+                        {
+                            return "<a href = '@Url.Action("AddorEdit","User")/" + row['ID'] + "')>" +  data + "</a>";
+                        },
+                    },
+
+                    {
+                        "data": "StartTime",
+                        "render": function (data, type, full) {
+                             return (data) ? moment(data).format('DD/MM/YYYY hh:mm:ss A') : '';
+                        }
+                    },
+                    
+                    {
+                        "data": "EndTime",                        
+
+                        "render":  function(data, type, full) {
+
+                            return (data) ? moment(data).format('DD/MM/YYYY hh:mm:ss A') : '';
+
+                        }
+                    },
+                    {
+                        "data": "Trips"
+                    },
+                    {
+                        "data": "Swipes"
+                    },
+                    {
+                        "data": "PrePaid", "render": function (data, type, row)
+                        {
+                            return "<a href = '@Url.Action("AddorEdit","User")/" + row['ID'] + "')>" + data + "</a>";
+                        },
+                        "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
+                    },
+                    {
+                        "data": "Cash", "render": function (data, type, row)
+                        {
+                            return "<a href = '@Url.Action("AddorEdit","User")/" + row['ID'] + "')>" + data + "</a>";
+                        },
+                        "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
+                    },
+                    {
+                        "data": "CCEFTPOS", "render": function (data, type, row)
+                        {
+                            return "<a href = '@Url.Action("AddorEdit","User")/" + row['ID'] + "')>" + data + "</a>";
+                        },
+                        "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
+                    },
+                     {
+                        "data": "TaxiChit", "render": function (data, type, row)
+                        {
+                            return "<a href = '@Url.Action("AddorEdit","User")/" + row['ID'] + "')>" + data + "</a>";
+                         },
+                         "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
+                    },
+                      {
+                        "data": "Gross", "render": function (data, type, row)
+                        {
+                            return "<a href = '@Url.Action("AddorEdit","User")/" + row['ID'] + "')>" + data + "</a>";
+                          },
+                          "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
+                    },
+
+                ],
+                "dom": "Bfrtip",
+                "buttons": ['copy', 'excel', 'csv', 'colvis'],
+                "order": [[0, "desc"]],
+                "columnDefs": [
+                    {
+                        "targets": 3, "type": "date-uk"
+                    },
+                    {
+                        "targets": 4, "type": "date-uk"
+                    },
+                ],
+
+            });
+         });
+    
+</script>
+

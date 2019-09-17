@@ -1,0 +1,321 @@
+﻿/*/* Set padding to keep content from hitting the edges */
+body {
+    padding-top: 0px;
+    padding-bottom: 10px;
+}
+
+/*/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.dashboard-button {
+    border: none;
+    text-align: center;
+    font-size: 20px !important;
+    border-radius: 10px;
+    height: 75px;
+    color: white !important;
+    background-color: slategrey;
+    border-color: slategrey;
+}
+.login-page-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;    
+    /*vertical-align: middle;*/
+    text-align: center;
+}
+
+
+.dash-button-new-incidents {
+    background-image: url('../Uploads/CreateANewIncident.png');
+    background-size: 150px 150px;
+    height: 150px;
+    width: 150px;
+    border-radius: 20px;
+    border: outset;
+    cursor: pointer;
+}
+.dash-button-open-incidents {
+    background-image: url('../Uploads/ShowOpenIncidents.png');
+    background-size: 150px 150px;
+    height: 150px;
+    width: 150px;
+    border-radius: 20px;
+    border: outset;
+    cursor: pointer;
+}
+.dash-button-view-closed-incidents {
+    background-image: url('../Uploads/ViewAClosedIncident.png');
+    background-size: 150px 150px;
+    height: 150px;
+    width: 150px;
+    border-radius: 20px;
+    border: outset;
+    cursor: pointer;
+}
+.dash-container-buttons {
+    background-color: #323F4F;
+    text-align:center;
+      
+    /*background-image: url('../Uploads/grey-background.jpg');*/
+}
+.mybody {
+    background-color: #D5DBE5;    
+}
+
+.textarea-comments {
+    height: 200px !important;
+    width: 500px !important;
+}
+.textarea-remediation {
+    height: 100px !important;
+    width: 100%;
+}
+
+.incident-table {
+    table-layout: fixed !important;
+    word-wrap: break-word;
+}
+
+
+
+
+
+#spam {
+    background-color: lightgray;
+    border-radius: 5px;
+    margin: auto;
+    width: 85%;
+    cursor: not-allowed;
+}
+
+.access-denied-heading {
+    padding-top: 30px;
+    font-size: 60px;
+    font-family: Arial;
+    text-align: center;
+    border-bottom: 1px solid #333;
+    border-bottom-style: dashed;
+    padding-bottom: 20px;
+}
+
+.access-denied-body { 
+    padding: 0;
+    margin: 0;
+    background: repeating-linear-gradient(45deg, darkred, darkred 2px, #330000 3px, #330000 8px);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+spam {
+    color: red;
+    text-decoration: none;
+    cursor: not-allowed;
+}
+
+p {
+    text-align: center;
+    font-family: Arial;
+    font-weight: bold;
+    padding-bottom: 3%;
+}
+
+small {
+    font-family: Arial;
+    text-align: center;
+    word-spacing: -1px;
+    font-size: 10px;
+    font-weight: normal;
+    color: gray;
+}
+
+#gears {
+    text-align: center;
+    color: #333;
+    width: 200px;
+    margin: auto;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.85);
+     opacity: 0.85; 
+    padding: 30px 0px;
+}
+
+.main-site-banner {   
+    color: white;
+    text-align: left;
+    font-size: 30px;
+    font-weight: 100;
+    letter-spacing: 2px;
+    font-family: 'Bernard MT'
+}
+
+.login-page-h1 {
+    /*margin: 0;*/
+    color: #fc3955;
+    text-align: center;
+    font-size: 30px;
+    font-weight:100;
+    letter-spacing: 2px;   
+    font-family: 'Bernard MT'
+}
+
+
+/* BUSY INDICATOR*/
+
+/* Absolute Center Spinner */
+.loading {
+    position: fixed;
+    display: none;
+    z-index: 1031;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+    /* Transparent Overlay */
+    .loading:before {
+        content: '';
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.3);
+    }
+
+    /* :not(:required) hides these rules from IE9 and below */
+    .loading:not(:required) {
+        font: 0/0 a;
+        color: transparent;
+        text-shadow: none;
+        background-color: transparent;
+        border: 0;
+    }
+
+        .loading:not(:required):after {
+            content: '';
+            display: block;
+            font-size: 10px;
+            width: 1em;
+            height: 1em;
+            margin-top: -0.5em;
+            -webkit-animation: spinner 1500ms infinite linear;
+            -moz-animation: spinner 1500ms infinite linear;
+            -ms-animation: spinner 1500ms infinite linear;
+            -o-animation: spinner 1500ms infinite linear;
+            animation: spinner 1500ms infinite linear;
+            border-radius: 0.5em;
+            -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+            box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+        }
+
+/* Animation */
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+/* BUSY INDICATOR END*/

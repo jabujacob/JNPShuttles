@@ -1,0 +1,160 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar-light .navbar-brand {
+    color: white
+}
+
+.navbar-light .navbar-nav .show > .nav-link,
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .nav-link.active {
+    color: white;
+}
+
+
+.bg-secondary {
+    background-color: #ff3555 !important;
+}
+
+.bg-agile h2 {
+    color: red;
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin: 10px 0px 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-control:focus {
+    background: none !important;
+    background-color: none !important ;
+}
+
+.login-form label {
+    
+    /*font-weight: normal;*/
+    background: none;    
+    color: silver;    
+    font-size: 14px;    
+    font-family: 'Roboto', sans-serif;
+    /*border:solid 1px #fff;*/
+}
+
+.login-form #VanID {
+    
+    margin-top:5px;
+}
+
+.container{
+    padding:0px !important;
+}
+
+.login-form input[type="button"], .agile_main_grid_left2_grid_bottom a {
+    background: #fc3158 !important;
+    color: #fff !important;
+    font-size: 17px !important;
+    margin-top: 10px !important;
+    border: none !important;
+    width: 100% !important;
+    outline: none !important;
+    letter-spacing: 1px !important;
+    cursor: pointer !important;
+    -webkit-appearance: none !important;
+    padding: 10px 15px !important;
+    font-family: 'Roboto', sans-serif !important;
+    transition: .5s ease-in !important;
+    -webkit-transition: .5s ease-in !important;
+    -moz-transition: .5s ease-in !important;
+    -o-transition: .5s ease-in !important;
+    /*-ms-transition: .5s ease-in !important;*/
+    border-radius: 0.25rem !important; 
+}
+
+    .login-form input[type="button"]:hover, .agile_main_grid_left2_grid_bottom a:hover {
+        background: #5fc9f8 !important;
+        color: #000;
+        transition: .5s ease-in;
+        -webkit-transition: .5s ease-in;
+        -moz-transition: .5s ease-in;
+        -o-transition: .5s ease-in;
+        /*-ms-transition: .5s ease-in;*/
+        border-radius: 0.25rem !important;
+    }
+
+.displayFieldHeader {
+    width: 100%;
+    border: solid 1px #fff;
+    border-radius: 0.25rem;
+    margin-bottom: 4%
+}
+
+.displayFieldLabel {
+    width:40%; 
+    float:left ;
+    padding: 6% 6% 6% 6% ;
+    font-weight:bold !important;    
+}
+
+.displayFieldValue {
+    width: 60%;
+    float: left;
+    padding: 6% 6% 6% 6%;
+}
+.displayFieldLabelDashboard {
+    width: 55%;
+    float: left;
+    padding: 6% 6% 6% 6%;
+    font-weight: bold !important;
+}
+
+.displayFieldValueDashboard {
+    width: 45%;
+    float: left;
+    padding: 6% 6% 6% 6%;
+}
+
+.displayFieldHeaderForEditView {
+    width: 100%;
+    border: solid 0px #fff;
+    border-radius: 0.25rem;
+    margin-bottom: 4%;
+    background: none;
+    padding-bottom: 0px;
+}
+.displayFieldLabelforEditView {
+    width: 100%;
+    float: left;
+    /*padding: 6% 6% 6% 6%;*/
+    font-weight: bold !important;
+}
+
+.displayFieldValueforDetailView{
+    color:white !important;
+}
+.displayIndexTableHeaderRow {
+    font-weight: bold !important;
+    font-size:large !important;
+}

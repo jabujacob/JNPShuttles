@@ -1,0 +1,114 @@
+﻿@model JNPPortal.Models.Driver
+
+@{
+
+    if (Ajax.IsThisAjaxRequest())
+    {
+        Layout = null;
+    }
+}
+<script src="~/Content/TextEditor/jquery-te-1.4.0.min.js"></script>
+<link href="~/Content/TextEditor/jquery-te-1.4.0.css" rel="stylesheet" />
+<script>
+    $('.ckeditor').jqte();
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-solid box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Edit User</h3>
+                    </div><!-- /.box-header -->
+
+                    <div class="alert alert-success alert-dismissable" id="dvMsgUser" style="display:none;">
+                        <i class="fa fa-apple"></i>
+                        <b> Update Successfully. </b>
+                    </div>
+                    <!-- form start -->
+
+                    <div role="form">
+                        <div class="box-body">
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.FirstName, new { @class = "" })
+                                @Html.EditorFor(model => model.FirstName)
+                                @Html.ValidationMessageFor(model => model.FirstName)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.LastName, new { @class = "" })
+                                @Html.EditorFor(model => model.LastName)
+                                @Html.ValidationMessageFor(model => model.LastName)
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.SuperShuttleID, new { @class = "" })
+                                @Html.EditorFor(model => model.SuperShuttleID)
+                                @Html.ValidationMessageFor(model => model.SuperShuttleID)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DefaultVanId, new { @class = "" })
+                                @Html.DropDownListFor(model => model.DefaultVanId, (SelectList)ViewBag.VanList, "Select One", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DefaultVanId)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DriverShare1, new { @class = "" })
+                                @Html.EditorFor(model => model.DriverShare1)
+                                @Html.ValidationMessageFor(model => model.DriverShare1)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DriverShare2, new { @class = "" })
+                                @Html.EditorFor(model => model.DriverShare2)
+                                @Html.ValidationMessageFor(model => model.DriverShare2)
+                            </div>
+
+                            <div class="box-footer">
+
+
+                                @*History Back*@
+                                @if (Request.UrlReferrer != null)
+                                {
+                                    <div class="col-md-1">
+                                        <a href=@Request.UrlReferrer class="btn btn-primary">
+                                            <i class="fa fa-home">
+                                                Back
+                                            </i>
+                                        </a>
+                                    </div>
+                                }
+
+                                <input type="submit" name="submit" value="Save" class="btn btn-primary" />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
+
+
+<script>
+    $(function () {
+        $("#roles-multiselect").chosen();
+        width: "100%"
+
+    });
+</script>
+
+
+
+

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<JNPShuttle.Models.Task>
+
+@{
+    ViewBag.Title = "Import Tasks";
+}
+
+<h2>Import Tasks from Super Shuttle</h2>
+
+@using (Html.BeginForm("Index", "Tasks", FormMethod.Post))
+{
+
+    <br />
+    <h7>Start Date</h7>
+    <br />
+    @Html.TextBox("dtStart", null, new { @class = "timePicker" })
+
+    <br />
+    <br/>
+
+    <h7>End Date</h7>
+    <br />
+
+    @Html.TextBox("dtEnd", null, new { @class = "timePicker" })
+    <br />
+
+    <br/>
+
+    <p><input type="submit" value="Import form Super Shuttle" /></p>
+
+  
+    <p style="color:green; font-size:12px;">
+
+        @ViewBag.Message
+
+    </p>
+
+
+ 
+}

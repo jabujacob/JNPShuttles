@@ -1,0 +1,187 @@
+﻿@model JNPShuttle.Models.TripSheet
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<head>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript">
+         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Meta tag Keywords -->
+    <link href="~/Smart Login/css/TripSheetDetails/font-awesome.css" rel="stylesheet">
+    <link href="~/Smart Login/css/TripSheetDetails/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- js -->
+    <script src="~/Smart Login/js/TripSheetDetails/jquery-2.2.3.min.js"></script>
+    <!-- //js -->
+    <!-- web-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Poller+One" rel="stylesheet">
+    <!-- //web-fonts -->
+</head>
+
+
+<body>
+
+    <div class="video" data-vide-bg="video/ship">
+        <div class="center-container">
+
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+
+                <div class="bg-agile">
+                    <br />
+                    <h1>Edit Trip Sheet</h1>
+
+                    <div class="login-form">
+                        <h2>@ViewBag.Message</h2>
+                    </div>
+                    <div class="login-form">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="login-form">
+
+
+                        <div class="displayFieldHeaderForEditView">
+                            <div class="displayFieldLabelforEditView">
+                                <label>Van</label>
+                                @Html.DropDownList("VanID", null, htmlAttributes: new { @class = "form-control", placeholder = "Van" })
+                                @Html.ValidationMessageFor(model => model.VanID, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeaderForEditView">
+                            <div class="displayFieldLabelforEditView">
+                                <label>Start Time</label>
+                                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control timePicker", placeholder = "Start Time" } })
+                                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeaderForEditView">
+                            <div class="displayFieldLabelforEditView">
+                                <label>Start KM</label>
+                                @Html.EditorFor(model => model.StartKM, new { htmlAttributes = new { @class = "form-control ", placeholder = "Start KM", type = "number" } })
+                                @Html.ValidationMessageFor(model => model.StartKM, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeaderForEditView">
+                            <div class="displayFieldLabelforEditView">
+                                <label>End Time</label>
+                                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control timePicker", placeholder = "End Time" } })
+                                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeaderForEditView">
+                            <div class="displayFieldLabelforEditView">
+                                <label>End KM</label>
+                                @Html.EditorFor(model => model.EndKM, new { htmlAttributes = new { @class = "form-control", placeholder = "End KM", type = "number" } })
+                                @Html.ValidationMessageFor(model => model.EndKM, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeaderForEditView">
+                            <div class="displayFieldLabelforEditView">
+                                <label>Trips</label>
+                                @Html.EditorFor(model => model.Trips, new { htmlAttributes = new { @class = "form-control", placeholder = "Trips" } })
+                                @Html.ValidationMessageFor(model => model.Trips, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeaderForEditView">
+                            <div class="displayFieldLabelforEditView">
+                                <label>Swipes</label>
+                                @Html.EditorFor(model => model.Swipes, new { htmlAttributes = new { @class = "form-control", placeholder = "Swipes" } })
+                                @Html.ValidationMessageFor(model => model.Swipes, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeaderForEditView">
+                            <div class="displayFieldLabelforEditView">
+                                <label>Prepaid</label>
+                                @Html.EditorFor(model => model.PrePaid, new { htmlAttributes = new { @class = "form-control", placeholder = "Prepaid", type = "number" } })
+                                @Html.ValidationMessageFor(model => model.PrePaid, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeaderForEditView">
+                            <div class="displayFieldLabelforEditView">
+                                <label>Cash</label>
+                                @Html.EditorFor(model => model.Cash, new { htmlAttributes = new { @class = "form-control", placeholder = "Cash", type = "number" } })
+                                @Html.ValidationMessageFor(model => model.Cash, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeaderForEditView">
+                            <div class="displayFieldLabelforEditView">
+                                <label>Eftops & CC</label>
+                                @Html.EditorFor(model => model.CCEFTPOS, new { htmlAttributes = new { @class = "form-control", placeholder = "Eftpos & CC", type = "number" } })
+                                @Html.ValidationMessageFor(model => model.CCEFTPOS, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeaderForEditView">
+                            <div class="displayFieldLabelforEditView">
+                                <label>Taxi Chit</label>
+                                @Html.EditorFor(model => model.TaxiChit, new { htmlAttributes = new { @class = "form-control", placeholder = "Taxi Chit", type = "number" }, })
+                                @Html.ValidationMessageFor(model => model.TaxiChit, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div style="clear:both;"></div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="login-form">
+                        <input type="submit" value="Update" />
+                    </div>
+
+
+                    <div class="login-form">
+
+                        <input type="button" value="Back" onclick="window.location='@Url.Action("Index", "TripSheets")'" />
+                    </div>
+
+
+                </div>
+
+            }
+        </div>
+    </div>
+
+</body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

@@ -1,0 +1,224 @@
+﻿@model JNPPortal.Models.ReportsViewModal
+
+@{
+    ViewBag.Title = "Trip Sheets Entry Status";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section ScriptsOrCss
+{
+
+    <link href="~/Content/DataTable/new/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/DataTable/new/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/dataTables.buttons.min.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/jszip.min.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/pdfmake.min.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/vfs_fonts.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/buttons.html5.min.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/buttons.colVis.min.js"></script>
+    <link href="~/Content/DataTable/new/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/DataTable/new/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <section class="content-header">
+        <h1>
+            @ViewBag.Title
+            <small> @ViewBag.Title</small>
+        </h1>
+    </section>
+
+    <section class="content">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-xs-12">
+
+                <div class="box box-solid box-primary">
+
+                    <div class="box-body">
+                        <!-- Split button -->
+                        <div class="margin">
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                    @if (Model != null)
+                                    {
+                                        <h4>
+                                            Supershuttle TTL last updated on @Model.UpdatedLastOnTime.ToString()
+                                        </h4>
+                                    }
+
+                                </div>
+
+                                <div class="btn-group col-md-2">
+                                    <input type="submit" name="submit" value="Import from Super Shuttle" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- flat split buttons -->
+                    </div><!-- /.box-body -->
+                </div>
+
+                <div class="box box-solid box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">@ViewBag.Title</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body table-responsive">
+
+                        <div class="margin">
+
+                            <div class="streaming-table">
+                                <span id="found" class="label label-info"></span>
+
+
+                                <table id="tbTripSheets" class="display nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Start Date </th>
+                                            <th>Driver </th>
+                                            <th>Van </th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+
+                                <div id="summary">
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box box-solid box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">List of vans that reported multiple drivers in TTL</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body table-responsive">
+
+                        <div class="margin">
+
+                            <div class="streaming-table">
+                                <span id="found" class="label label-info"></span>
+
+
+                                <table id="tbTripSheetsMultipleDrivers" class="display nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Start Date </th>
+                                            <th>Driver </th>
+                                            <th>Van </th>                                          
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+
+                                <div id="summary">
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+}
+
+
+<script type="text/javascript">
+    
+    $(document).ready(function () {
+
+        $("#tbTripSheets").DataTable(
+
+            {
+                "ajax": {
+
+
+                    "url": "/reports/TripSheetEntryStatusGetGrid",
+                    "type": "GET",
+                    "dataType": "json"
+                },
+                "columns": [
+
+                    {
+                        "data": "StartDate",
+                       "render": function (data, type, full) {
+
+                            return (data) ? moment(data).format('DD/MM/YYYY') : '';
+
+                        }
+
+                    },
+                    {
+                        "data": "Driver",
+                    },
+                    {
+                        "data": "Van",
+                    },
+
+                    {
+                        "data": "TripSheetEntered",
+                    },
+
+                ],
+
+                "dom": "Bfrtip",
+                "buttons": ['copy', 'pdf', 'excel', 'csv', 'colvis'],
+                "order": [[0, "desc"]],
+                "columnDefs": [{ "targets": 0, "type": "date-uk" }],
+                "paging": true
+
+            });
+
+
+
+        $("#tbTripSheetsMultipleDrivers").dataTable(
+
+            {
+                "ajax": {
+
+
+                    "url": "/reports/TripSheetEntryMultipleDriverPerVanGetGrid",
+                    "type": "GET",
+                    "dataType": "json"
+                },
+                "columns": [
+
+                    {
+                        "data": "StartDate",
+                        "render": function (data, type, full) {
+
+                            return (data) ? moment(data).format('DD/MM/YYYY') : '';
+
+                        }                       
+
+                    },
+
+                    {
+                        "data": "Van",
+                    },
+                    {
+                        "data": "Driver",
+                    },
+
+                ],
+                "dom": "Bfrtip",
+                "buttons": ['copy', 'pdf', 'excel', 'csv', 'colvis'],
+                "order": [[0, "desc"]],
+                "columnDefs": [{ "targets": 0, "type": "date-uk" }],
+                "paging": true
+
+            });
+    });
+
+</script>
+

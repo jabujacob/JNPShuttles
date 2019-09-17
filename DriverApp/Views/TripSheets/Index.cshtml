@@ -1,0 +1,72 @@
+﻿@model IEnumerable<JNPShuttle.Models.TripSheet>
+
+@{
+    ViewBag.Title = "Daily Trip Summary";
+}
+
+    <head>
+        <!-- Meta tag Keywords -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="" />
+        <script type="application/x-javascript">
+             addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+            function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <!-- Meta tag Keywords -->
+        <link href="~/Smart Login/css/TripSheetDetails/font-awesome.css" rel="stylesheet">
+        <link href="~/Smart Login/css/TripSheetDetails/style.css" rel="stylesheet" type="text/css" media="all" />       
+
+        <!-- js -->
+        <script src="~/Smart Login/js/TripSheetDetails/jquery-2.2.3.min.js"></script>
+        <!-- //js -->
+        <!-- web-fonts -->
+        <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Poller+One" rel="stylesheet">
+        <!-- //web-fonts -->
+    </head>
+
+<body>    
+      
+    <div class="center-container">            
+        <div class="bg-agile">
+            <br />
+            <h1>Trip Sheets</h1>
+            <div class="login-form">
+                <h2>@ViewBag.Message</h2>
+            </div>
+
+            <div class="login-form">
+
+                <div class="displayFieldHeaderForEditView">
+                    @if (Session["AdminUser"].ToString() != "True")
+                    { 
+                        <input type="button" value="New Trip Sheet" onclick="window.location='@Url.Action("Create", "TripSheets")'" />
+                    }
+                </div>
+
+                @foreach (var item in Model)
+
+                {           
+            <div class="displayFieldHeaderForEditView">
+                @if (Session["AdminUser"].ToString() == "True")
+                {  
+               
+                    <input type="button" value=@String.Concat( item.Driver.FirstName,"-",Convert.ToDateTime(item.StartTime).ToString("dd/MMM/yyyy")) onclick="window.location='@Url.Action("Details", "TripSheets",new { id = item.ID })'" />
+                }
+                else
+                {
+                    <input type="button" value=@Convert.ToDateTime(item.StartTime).ToString("dd/MMM/yyyy hh:mm tt") onclick="window.location='@Url.Action("Details", "TripSheets",new { id = item.ID })'" />
+                }
+
+            </div>
+                }
+
+                @*<div class="displayFieldHeaderForEditView">
+                    <input type="button" value="Earnings Summary" onclick="window.location='@Url.Action("Dashboard", "Home")'" />
+                </div>*@
+            </div>
+        </div>
+    </div>
+</body>

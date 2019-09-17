@@ -1,0 +1,312 @@
+﻿@model JNPPortal.Models.Tripsheet
+
+@*Form Content*@
+
+@using (Html.BeginForm())
+
+{
+    @Html.AntiForgeryToken()
+
+    <section class="content-header">
+        <h1>
+            @ViewBag.Title
+        </h1>
+    </section>
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    @Html.HiddenFor(model => model.Gross)
+    @Html.HiddenFor(model => model.KMTravelled)
+    @Html.HiddenFor(model => model.Duration)
+
+    <section class="content">
+
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-md-12">
+                @* Top Buttons*@
+                <div class="row">
+
+                    <div class="col-md-10">
+
+                        @*History Back*@
+                        @if (Request.UrlReferrer != null)
+                        {
+                            <div class="col-md-1">
+                                <a href=@Request.UrlReferrer class="btn btn-primary">
+                                    <i class="fa fa-home">
+                                        Back
+                                    </i>
+                                </a>
+                            </div>
+                        }
+
+                        @* Save  *@
+
+
+                        <div class="col-md-1">
+                            <div class="col-md-1">
+                                <input type="submit" name="submit" value="Save" class="btn btn-primary" />
+                            </div>
+                        </div>
+
+
+                        @* Cancel - Visible at all times *@
+                        <div class="col-md-1">
+                            <div class="col-md-2">
+                                <a href="@Url.Action("Index", "TripSheets")" class="btn btn-primary">Cancel</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>  @* Top Buttons*@
+                <br />
+
+                @*Alert Message Display*@
+
+                @section my_javascript_variables{
+                    <script type="text/javascript">
+                                var message = '@ViewBag.Message';
+                    </script>
+                }
+
+                @if (ViewBag.Message != null)
+                {
+                    <script type="text/javascript">
+                        window.onload = function () {
+                            swal("JNP Shuttles", message, "success");
+                        };
+                    </script>
+                }
+
+                @if (Model != null)
+                {
+                    //Heading
+                    if (Model.ID > 0)
+                    {
+                        <h3>Tripsheet No.@Model.ID (Duration: @Model.Duration & Distance: @Model.KMTravelled kms)</h3>
+                    }
+                    else
+                    {
+                        <h3>Create Tripsheet</h3>
+                    }
+
+
+                    @*Top Content Box*@
+                    <div class="box box-solid box-primary col-md-8">
+                        <div class="box-body">
+                            <!-- Split button -->
+                            <div class="margin">
+                                <div>
+                                    <div class="row">
+                                        <div class="col-md-3 ">
+                                            @Html.LabelFor(model => model.VanID)
+                                        </div>
+                                        <div class="col-md-3 ">
+                                            @Html.DropDownListFor(model => model.VanID, (SelectList)ViewBag.VanList, "Select One", htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.VanID, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(model => model.DriverID)
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            @Html.DropDownListFor(model => model.DriverID, (SelectList)ViewBag.DriverList, "Select One", htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.DriverID, "", new { @class = "text-danger" })
+                                        </div>
+
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(model => model.StartKM)
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.EditorFor(model => model.StartKM, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.StartKM, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(model => model.StartTime)
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control timePicker", @style = "width:200px" } })
+                                            @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                                        </div>
+
+
+
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(model => model.EndKM)
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.EditorFor(model => model.EndKM, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.EndKM, "", new { @class = "text-danger" })
+                                        </div>
+
+
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(model => model.EndTime)
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control timePicker", @style = "width:200px" } })
+                                            @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                                        </div>
+
+
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(model => model.Trips)
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.EditorFor(model => model.Trips, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Trips, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(model => model.Swipes)
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.EditorFor(model => model.Swipes, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Swipes, "", new { @class = "text-danger" })
+                                        </div>
+
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(model => model.PrePaid)
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                @Html.TextBoxFor(model => model.PrePaid, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.PrePaid, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(model => model.Cash)
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+
+                                                @Html.TextBoxFor(model => model.Cash, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Cash, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(model => model.CCEFTPOS)
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                @Html.TextBoxFor(model => model.CCEFTPOS, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.CCEFTPOS, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(model => model.TaxiChit)
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                @Html.TextBoxFor(model => model.TaxiChit, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+
+                                            @Html.ValidationMessageFor(model => model.TaxiChit, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    @if (Model.ID > 0)
+                                    {
+                                        <div class="row">
+
+
+                                            <div class="col-md-3">
+                                                @Html.LabelFor(model => model.Gross)
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">$</span>
+                                                    @Html.EditorFor(model => model.Gross, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                                    @Html.ValidationMessageFor(model => model.Gross, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> @*Top Content Box*@
+                }
+            </div>
+        </div>
+
+
+    </section>
+
+}
+
+
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
+            });
+
+            $.validator.addMethod('date', function (value, element, params) {
+                if (this.optional(element)) {
+                    return true;
+                }
+                var ok = true;
+                try {
+                    $.datepicker.parseDate('dd/mm/yy', value);
+                }
+
+                catch (err) {
+                    ok = false;
+                }
+                return ok;
+            });
+        });
+
+    </script>*@
+
+<script>
+    $(function () {
+        //normal dropdown
+        $("#reported-by").chosen();
+
+    });
+</script>
+

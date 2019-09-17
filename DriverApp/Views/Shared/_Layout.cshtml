@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - JNP Shuttles</title>
+        
+    <link rel="icon" href="~/icon.png" sizes="32x32" />    
+
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="~/Content/themes/base/datepicker.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />    
+    <link href="~/Content/jquery-ui-timepicker-addon.css" rel="stylesheet" />
+       
+
+</head>
+<body onbeforeunload="setHourglass();" onunload="setHourglass();">
+    <nav class="navbar navbar-expand-lg navbar navbar-light bg-secondary  navbar fixed-top">
+        @*<a class="navbar-brand" href="/Home/Index">JNP Shuttles</a>*@
+        <a class="navbar-brand" href="/Tripsheets/Index">JNP Shuttles</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+
+
+                @if (this.Session.Count > 0)
+                {
+                    if (this.Session["AdminUser"].ToString() == "True")
+                    {
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Tasks/Index">Tasks</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Users/Index">Users</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Drivers/Index">Drivers</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Vans/Index">Vans</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Home/Dashboard">Earnings Summary</a>
+                        </li>
+                    }
+                    else
+                    {
+                        @*<li class="nav-item active">
+                    <a class="nav-link" href="/Home/Dashboard">Earnings Summary</a>
+                </li>*@
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/TripSheets/Index">Trip Sheets</a>
+                        </li>
+                    }
+
+                }
+
+            </ul>                     
+                       
+        </div>    
+    </nav>
+        
+
+        <div class="container body-content">
+
+            @if (this.Session.Count > 0)
+                
+            {
+                <p>
+                    Welcome  @this.Session["GreetingName"].ToString()
+
+                </p>
+            }
+            
+            @RenderBody()
+
+        </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-timepicker-addon.js"></script>
+
+    <script src="~/Scripts/Site.js"></script>
+
+
+    @*Show busy icon on load*@
+    <script type="text/javascript">
+
+        function setHourglass() {
+            document.body.style.cursor = 'wait';
+        }
+
+    </script>
+
+</body >
+</html >

@@ -1,0 +1,226 @@
+﻿@model JNPShuttle.Models.TripSheet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+    <head>
+        <!-- Meta tag Keywords -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="" />
+        <script type="application/x-javascript">
+             addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+            function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <!-- Meta tag Keywords -->
+        <link href="~/Smart Login/css/TripSheetDetails/font-awesome.css" rel="stylesheet">
+        <link href="~/Smart Login/css/TripSheetDetails/style.css" rel="stylesheet" type="text/css" media="all" />
+        <!-- js -->
+        <script src="~/Smart Login/js/TripSheetDetails/jquery-2.2.3.min.js"></script>        
+        <!-- //js -->
+        <!-- web-fonts -->
+        <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Poller+One" rel="stylesheet">
+        <!-- //web-fonts -->
+    </head>
+
+    <body>
+
+        <div class="video" data-vide-bg="video/ship">
+            <div class="center-container">
+                <div class="bg-agile">
+                    <br />
+                    <h1>Trip Sheet Details</h1>                    
+                    <br />
+                    <div class="login-form">
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>Van</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView">@Html.DisplayFor(model => model.Van.Name)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>Driver</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView">@Html.DisplayFor(model => model.Driver.FirstName)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>Start Time</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView">@Html.DisplayFor(model => model.StartTime)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>Start KM</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView">@Html.DisplayFor(model => model.StartKM)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>End Time</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView">@Html.DisplayFor(model => model.EndTime)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>End KM</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView">@Html.DisplayFor(model => model.EndKM)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>Duration</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView">@Html.DisplayFor(model => model.Duration)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>KMs Travelled</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView"> @Html.DisplayFor(model => model.KMTravelled)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>Trips</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView">@Html.DisplayFor(model => model.Trips)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>Swipes</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView">@Html.DisplayFor(model => model.Swipes)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>Prepaid</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView">@Html.DisplayFor(model => model.PrePaid)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>Cash</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView">@Html.DisplayFor(model => model.Cash)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+
+
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>Eftops & CC</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView"> @Html.DisplayFor(model => model.CCEFTPOS)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>Taxi Chit</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView"> @Html.DisplayFor(model => model.TaxiChit)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+
+                        <div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>Gross</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView">@Html.DisplayFor(model => model.Gross)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        @*<div class="displayFieldHeader">
+                            <div class="displayFieldLabel">
+                                <label>Net Cash</label>
+                            </div>
+                            <div class="displayFieldValue">
+                                <label class="displayFieldValueforDetailView"> @Html.DisplayFor(model => model.NetCash)</label>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>*@
+
+                        @if (Session["AdminUser"].ToString() != "True")
+                        {
+                            <div class="login-form">
+                                <input type="button" value="Edit" onclick="window.location='@Url.Action("Edit", "TripSheets", new { id = Model.ID })'" />
+                            </div>
+
+                            <div class="login-form">
+                                <input type="button" value="Delete" onclick="window.location='@Url.Action("Delete", "TripSheets",new { id = Model.ID })'" />
+                            </div>
+                        }
+
+
+                        <div class="login-form">
+                            <input type="button" value="Back" onclick="window.location='@Url.Action("Index", "TripSheets")'" />
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </body>
