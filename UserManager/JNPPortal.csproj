@@ -1623,6 +1623,7 @@
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Drivers\Index.cshtml" />
     <Content Include="Views\Drivers\AddOrEdit.cshtml" />
+    <Content Include="Views\Reports\DriverAnalysisMonthlySummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

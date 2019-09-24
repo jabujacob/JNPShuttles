@@ -151,6 +151,14 @@ namespace WebAPI
                 return output;
             }
         }
+        public Driver GetDriver(string superShuttleId)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
+            {
+                var output = connection.Query<Driver>("[dbo].[GetDriverBySuperShuttleId]  @SuperShuttleId", new { SuperShuttleId = superShuttleId}).FirstOrDefault();
+                return output;
+            }
+        }
         public Driver GetDriver(int id)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
@@ -227,6 +235,15 @@ namespace WebAPI
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
             {
                 var output = connection.Query<DriverAnalysis>("[dbo].[Get_Driver_Analysis_Summary] @startDate, @endDate, @driverId", new { startDate = startDate, endDate = endDate, driverId = driverId }).ToList();
+                return output;
+            }
+        }
+
+        public List<DriverAnalysis> GetDriverMonthlyAnalysisSummary(DateTime startDate, DateTime endDate)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
+            {
+                var output = connection.Query<DriverAnalysis>("[dbo].[Get_Driver_Monthly_Analysis_Summary] @startDate, @endDate", new { startDate = startDate, endDate = endDate}).ToList();
                 return output;
             }
         }

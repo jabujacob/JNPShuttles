@@ -13,6 +13,8 @@ namespace WebAPI.Models
         public int TaskId { get; set; }
         public int VehicleNumber { get; set; }
         public DateTime PickupDate { get; set; }
+        public int Days { get; set; }
+        public string Month { get; set; }
         public DateTime PickUpTime { get; set; }
         public string PickUpAddress { get; set; }
         public string DropOffAddress { get; set; }
@@ -57,5 +59,14 @@ namespace WebAPI.Models
         public decimal VariancePrePaid { get; set; }
         public decimal VarianceCash { get; set; }
         public decimal VarianceGross { get; set; }
+
+        public decimal GrossPerShift { get; set; }
+        public decimal NetPerShift { get; set; }
+        public decimal DrvrPerShift { get; set; }
+        public decimal OptrPer { get; set; }
+        public decimal ContrPerShift { get; set; }
+        public decimal AvgDrops { get; set; }
+        public decimal HourlyRate { get; set; }
+
     }
 }

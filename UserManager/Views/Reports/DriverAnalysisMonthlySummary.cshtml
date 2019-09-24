@@ -2,7 +2,7 @@
 
 
 @{
-    ViewBag.Title = "Driver Anlaysis - Daily Summary";
+    ViewBag.Title = "Driver Anlaysis - Monthly Summary";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section ScriptsOrCss
@@ -65,13 +65,7 @@
                         </div>
 
 
-                        <div class="col-md-1">
-                            @Html.LabelFor(model => model.DriverId)
-                        </div>
-                        <div class="col-md-2">
-                            @Html.DropDownListFor(model => model.DriverId, (SelectList)ViewBag.DriverList, "Select One", htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.DriverId, "", new { @class = "text-danger" })
-                        </div>
+                                          
 
                         <div class="col-md-1">
                             <div class="col-md-1">
@@ -90,17 +84,13 @@
                                 <span id="found" class="label label-info"></span>
 
 
-                                <table id="tbDriverAnalysisSummary" class="display nowrap">
+                                <table id="tbDriverAnalysisMonthlySummary" class="display nowrap">
                                     <thead>
                                         <tr>
+                                            <th>Month</th>
                                             <th>Super Shuttle ID</th>
-                                            <th>Pickup Date</th>
-                                            <th>Van</th>
-                                            <th>Start KM</th>
-                                            <th>End KM</th>
+                                            <th>Days</th>
                                             <th>KM Run</th>
-                                            <th>Start Time</th>
-                                            <th>End Time</th>
                                             <th>Time Worked</th>
                                             <th>Trips</th>
                                             <th>Swipes</th>
@@ -126,6 +116,13 @@
                                             <th>$/Km Net</th>
                                             <th>Contr</th>
                                             <th>DrvrNet</th>
+                                            <th>Gross/Shift</th>
+                                            <th>Net/Shift</th>
+                                            <th>Drvr/Shift</th>
+                                            <th>Optr/</th>
+                                            <th>Contr/Shift</th>
+                                            <th>AvgDrops</th>
+                                            <th>HrlyRate</th>                                           
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -138,7 +135,7 @@
                             </div>
                         </div>
                     </div>
-                </div>              
+                </div>
             </div>
         </div>
     </section>
@@ -148,80 +145,44 @@
 
      $(document).ready(function () {
 
-             var startDate = '@ViewBag.StartDate';
-             var endDate = '@ViewBag.EndDate';
-             var driverId = '@ViewBag.DriverId';
 
+         var startDate = '@ViewBag.StartDate';
+         var endDate = '@ViewBag.EndDate';
+                    
 
-             $("#tbDriverAnalysisSummary").dataTable(
+         $("#tbDriverAnalysisMonthlySummary").dataTable(
                  {
 
                     "ajax": {
 
-                        "url": "/Reports/DriverAnalysisSummaryGetGrid?startDate="+ startDate +"&endDate="+ endDate +"&driverId="+driverId ,
+                        "url": "/Reports/DriverAnalysisMonthlySummaryGetGrid?startDate="+ startDate +"&endDate="+ endDate,
                         "type": "GET",
                         "dataType": "json"
                     },
 
-                    "columns": [
+                     "columns": [
+                         {
+                            "data": "Month",
+                           
+                        },
                         {
-                            "data": "SuperShuttleId",                       
+                            "data": "SuperShuttleId",
                             "render": function (data, type, row)
                             {
-
-                                var pattern = /Date\(([^)]+)\)/;    //date format from server side
-                                var results = pattern.exec(row['PickupDate']);
-                                var dt = new Date(parseFloat(results[1]));
-
-                                var startdate1= dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate();
-
-
-                                return "<a href = '/Reports/DriverAnalysisDetail?startDate="+ startdate1 +"&endDate="+ startdate1 +"&driverId="+driverId +"'>" + data + "</a>";
+                                return "<a href = '/Reports/DriverAnalysisSummaryBySuperShuttleId?startDate=" + startDate + "&endDate=" + endDate + "&superShuttleId=" + data + "'>" + data + "</a>";
                             },
                         },
                         {
-                            "data": "PickupDate", 
-                            "render":  function(data, type, full) {
-                                return (data) ? moment(data).format('DD/MM/YYYY') : '';
-                            }
-
+                            "data": "Days",
+                           
                         },
                         
                         {
-                            "data": "VehicleNumber"
-                        },
-                        {
-                            "data": "ShiftStartKM"
-                         
-                        },
-                        {
-                            "data": "ShiftEndKM"
-                           
-                        },
-                        {
                             "data": "ShiftKMRun"
-                           
-                        },
+
+                        },                        
                         {
-                            "data": "ShiftStartTime",
-                            
-                           "render":  function(data, type, full) {
-
-                            return (data) ? moment(data).format('DD/MM/YYYY hh:mm:ss A') : '';
-
-                           }
-
-                        },
-                        {
-                            "data": "ShiftEndTime", 
-                            "render":  function(data, type, full) {
-
-                            return (data) ? moment(data).format('DD/MM/YYYY hh:mm:ss A') : '';
-
-                        }
-                        },
-                        {
-                            "data": "ShiftTimeWorked" 
+                            "data": "ShiftTimeWorked"
                         },
                         {
                             "data": "Trips"
@@ -230,111 +191,127 @@
                             "data": "Swipes"
                         },
                         {
-                            "data": "Drops" 
+                            "data": "Drops"
                         },
                         {
-                            "data": "Pax" 
+                            "data": "Pax"
                         },
                         {
-                            "data": "Transfer" 
+                            "data": "Transfer"
                         },
                         {
-                            "data": "DriverPrePaid", 
+                            "data": "DriverPrePaid",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "TTLPrePaid", 
+                            "data": "TTLPrePaid",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "VariancePrePaid", 
+                            "data": "VariancePrePaid",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "DriverCash", 
+                            "data": "DriverCash",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "TTLCash", 
+                            "data": "TTLCash",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "VarianceCash", 
+                            "data": "VarianceCash",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "DriverCCEFTPOS", 
+                            "data": "DriverCCEFTPOS",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "DriverTaxiChit", 
+                            "data": "DriverTaxiChit",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "DriverGross", 
+                            "data": "DriverGross",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "TTLGross", 
+                            "data": "TTLGross",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "VarianceGross", 
+                            "data": "VarianceGross",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "SurCharge", 
+                            "data": "SurCharge",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "TelephoneCharge", 
+                            "data": "TelephoneCharge",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "Net", 
+                            "data": "Net",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "Drvr", 
+                            "data": "Drvr",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "Optr", 
+                            "data": "Optr",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "DollarPerKMNet", 
+                            "data": "DollarPerKMNet",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "Contr", 
+                            "data": "Contr",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
                         {
-                            "data": "DrvrNet", 
+                            "data": "DrvrNet",
+                                 "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
+                         },
+                        {
+                            "data": "GrossPerShift",
+                                 "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
+                         },
+                        {
+                            "data": "NetPerShift",
+                                 "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
+                         },
+                        {
+                            "data": "DrvrPerShift",
+                                 "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
+                         },
+                        {
+                            "data": "OptrPer",
+                                 "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
+                         },
+                        {
+                            "data": "ContrPerShift",
                                  "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
                         },
-
+                        {
+                            "data": "AvgDrops"
+                                
+                         },
+                        {
+                            "data": "HourlyRate",
+                                 "render": $.fn.dataTable.render.number( ',', '.', 2, '$' )
+                         }                       
                     ],
                     "dom": "Bfrtip",
                     "buttons": ['copy','excel', 'csv', 'colvis'],
                      "order": [[0, "desc"]],
-                     "paging": true,
+                     "paging": false,
                      "columnDefs": [
 
                          {
-                             "targets": 1, "type": "date-uk"
-                         },
-
-                        {
-                            "targets": 3, "type": "date-uk"
-                         },
-
-                         {
-                            "targets": 9, "type": "date-uk"
-                         },
-                         {
-                            "targets": 10, "type": "date-uk"
+                             "targets": 11, "type": "date-uk"
                          },
                      ],
                  });
@@ -365,8 +342,8 @@
                 ok = false;
             }
             return ok;
-        });     
+        });
     });
-    
+
 </script>
 

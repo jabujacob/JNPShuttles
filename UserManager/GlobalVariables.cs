@@ -28,7 +28,6 @@ namespace JNPPortal
 
             WebApiClient.DefaultRequestHeaders.Clear();
             WebApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
         }
 
         public struct DateTimeSpan

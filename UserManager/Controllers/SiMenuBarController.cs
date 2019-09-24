@@ -71,11 +71,16 @@ namespace JNPPortal.Controllers
             x = "<li class=\"\"> <a href=\"/Reports/TripSheetEntryStatus\"><i class=\"fa fa-angle-double-right\"></i>Trip Sheets Entry Status</a></li>";
             sb.Append(x);
 
-            //Daily Driver Analysis
-            x = "<li class=\"\"> <a href=\"/Reports/DriverAnalysisSummary\"><i class=\"fa fa-angle-double-right\"></i>Driver Analysis Summary</a></li>";
-            sb.Append(x);            
+            //Monthly Driver Analysis
+            x = "<li class=\"\"> <a href=\"/Reports/DriverAnalysisMonthlySummary\"><i class=\"fa fa-angle-double-right\"></i>Driver Analysis-Monthly</a></li>";
+            sb.Append(x);
 
-            x = "<li class=\"\"> <a href=\"/Reports/DriverAnalysisDetail\"><i class=\"fa fa-angle-double-right\"></i>Driver Analysis Details</a></li>";
+            //Daily Driver Analysis
+            x = "<li class=\"\"> <a href=\"/Reports/DriverAnalysisSummary\"><i class=\"fa fa-angle-double-right\"></i>Driver Analysis-Daily Summary</a></li>";
+            sb.Append(x);
+
+            //Daily Driver Analysis Details
+            x = "<li class=\"\"> <a href=\"/Reports/DriverAnalysisDetail\"><i class=\"fa fa-angle-double-right\"></i>Driver Analysis-Daily Details</a></li>";
             sb.Append(x);          
 
             sb.Append("</ul>");

@@ -13,6 +13,51 @@ namespace JNPPortal.Controllers
     public class ReportsController : Controller
     {
         // GET: Reports
+        [HttpGet]
+        public ActionResult DriverAnalysisMonthlySummary(DateTime? startDate, DateTime? endDate)
+        {
+            if (startDate == null)
+            {
+                DateTime now = DateTime.Now;
+                startDate = new DateTime(now.Year, now.Month, 1);
+                endDate = Convert.ToDateTime(startDate).AddMonths(1).AddDays(-1);
+               
+            }
+
+
+            ReportsViewModal rvm = new ReportsViewModal();
+
+            rvm.StartDate = Convert.ToDateTime(startDate);
+            rvm.EndDate = Convert.ToDateTime(endDate);
+      
+
+            ViewBag.StartDate = HttpUtility.UrlEncode(String.Format("{0:dd/MMM/yyyy}", startDate));
+            ViewBag.EndDate = HttpUtility.UrlEncode(String.Format("{0:dd/MMM/yyyy}", endDate));
+
+            return View(rvm);
+
+        }
+
+        [HttpGet]
+        public ActionResult DriverAnalysisMonthlySummaryGetGrid(DateTime startDate, DateTime endDate)
+        {
+
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("api/DriverAnalysisMonthlySummary?startDate=" + HttpUtility.UrlEncode(String.Format("{0:dd/MMM/yyyy}", startDate)) + "&endDate=" + HttpUtility.UrlEncode(String.Format("{0:dd/MMM/yyyy}", endDate))).Result;
+            IEnumerable<DriverAnalysis> driverAnalysisSummary = response.Content.ReadAsAsync<IEnumerable<DriverAnalysis>>().Result;
+
+            return Json(new { data = driverAnalysisSummary }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpPost]
+        public ActionResult DriverAnalysisMonthlySummary(ReportsViewModal rvm)
+        {
+            ViewBag.StartDate = HttpUtility.UrlEncode(String.Format("{0:dd/MMM/yyyy}", rvm.StartDate));
+            ViewBag.EndDate = HttpUtility.UrlEncode(String.Format("{0:dd/MMM/yyyy}", rvm.EndDate));          
+          
+            return View(rvm);
+        }
+
 
         [HttpGet]
         public ActionResult DriverAnalysisSummary(DateTime? startDate, DateTime? endDate, int? driverId)
@@ -49,6 +94,16 @@ namespace JNPPortal.Controllers
             return View(rvm);
 
         }
+
+        [HttpGet]
+        public ActionResult DriverAnalysisSummaryBySuperShuttleId(DateTime? startDate, DateTime? endDate, string superShuttleId)
+        {
+            Driver driver;
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("api/Drivers?supershuttleid=" + superShuttleId).Result;
+            driver = response.Content.ReadAsAsync<Driver>().Result;
+            return RedirectToAction("DriverAnalysisSummary","Reports" ,new{startDate = startDate,endDate = endDate,driverId = driver.ID});
+        }
+
         [HttpGet]
         public ActionResult DriverAnalysisSummaryGetGrid(DateTime startDate, DateTime endDate, int driverId)
         {
@@ -78,6 +133,7 @@ namespace JNPPortal.Controllers
 
             return View(rvm);
         }
+
 
 
         [HttpGet]

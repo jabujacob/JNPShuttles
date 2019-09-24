@@ -26,6 +26,12 @@ namespace WebAPI.Controllers
             return db.GetDriver(id);
         }
 
+        // GET: api/Drivers/5
+        public Driver Get(string superShuttleId)
+        {
+            return db.GetDriver(superShuttleId);
+        }
+
         // POST: api/Drivers
         public void Post(Driver driver)
         {
@@ -37,10 +43,6 @@ namespace WebAPI.Controllers
         {
             db.UpdateDriver(driver);
         }
-
-        // DELETE: api/Drivers/5
-        public void Delete(int id)
-        {
-        }
+               
     }
 }
