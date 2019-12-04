@@ -22,7 +22,7 @@ namespace JNPPortal
 
 
             WebApiClient.BaseAddress = new Uri("https://api.jnpshuttles.com/");
-            WebApiClient.BaseAddress = new Uri("http://localhost:64501/api");           
+            //WebApiClient.BaseAddress = new Uri("http://localhost:64501/api");           
 
             WebApiClient.DefaultRequestHeaders.Clear();
             WebApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
