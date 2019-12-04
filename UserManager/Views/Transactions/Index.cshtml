@@ -36,10 +36,10 @@
                     <div class="margin">
 
                         <div class="btn-group">
-                            <a href="@Url.Action("AddorEdit","Transactions")" class="btn btn-primary">Create Single</a>
+                            <a href="@Url.Action("AddorEdit","Transactions")" class="btn btn-primary">Create Single Van Transaction</a>
                         </div>
                         <div class="btn-group">
-                            <a href="@Url.Action("AddorEdit/-1","Transactions")" class="btn btn-primary">Create Multiple</a>
+                            <a href="@Url.Action("AddorEdit/-1","Transactions")" class="btn btn-primary">Create Multiple Van Transaction</a>
                         </div>
                     </div>
                     <!-- flat split buttons -->
@@ -64,10 +64,13 @@
                                         <th> @Html.DisplayNameFor(model => model.Date) </th>
                                         <th> @Html.DisplayNameFor(model => model.Account) </th>
                                         <th> @Html.DisplayNameFor(model => model.Van) </th>
-                                        <th> @Html.DisplayNameFor(model => model.Expense) </th>
+                                        <th> @Html.DisplayNameFor(model => model.AccountType) </th>
                                         <th> @Html.DisplayNameFor(model => model.Amount) </th>
                                         <th> @Html.DisplayNameFor(model => model.GST) </th>
-                                        <th> Net</th>
+                                        <th> @Html.DisplayNameFor(model => model.Net) </th>
+                                        <th> @Html.DisplayNameFor(model => model.ItemDescription) </th>
+                                        <th> @Html.DisplayNameFor(model => model.InvoiceNumber) </th>
+                                        <th> @Html.DisplayNameFor(model => model.Quantity) </th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -88,10 +91,10 @@
                     <div class="margin">
 
                         <div class="btn-group">
-                            <a href="@Url.Action("AddorEdit","Transactions")" class="btn btn-primary">Create</a>
+                            <a href="@Url.Action("AddorEdit","Transactions")" class="btn btn-primary">Create Single Van Transaction</a>
                         </div>
                         <div class="btn-group">
-                            <a href="@Url.Action("AddorEdit/-1","Transactions")" class="btn btn-primary">Create Multiple</a>
+                            <a href="@Url.Action("AddorEdit/-1","Transactions")" class="btn btn-primary">Create Multiple Van Transaction</a>
                         </div>
                     </div>
                     <!-- flat split buttons -->
@@ -164,15 +167,7 @@
                         "data": "Van"
                     },   
                     {
-                        "data": "Expense", "render": function (data, type, row)
-                        {
-                            if (data == '1') {
-                                return "Yes";
-                            }
-                            else {
-                                return "No";
-                            }                          
-                        },
+                        "data": "AccountType"
                     },
                     
                     
@@ -185,7 +180,15 @@
                     {
                         "data": "Net"
                     },
-                                   
+                          {
+                        "data": "ItemDescription"
+                    },
+                    {
+                        "data": "InvoiceNumber"
+                    },
+                    {
+                        "data": "Quantity"
+                    },         
 
                 ],
                 "dom": "Bfrtip",

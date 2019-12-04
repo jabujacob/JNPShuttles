@@ -10,8 +10,8 @@ namespace WebAPI.Models
         public int Id { get; set; }
         public int AccountId { get; set; }       
         public string Account { get; set; }
-        public bool Expense { get; set; }
-        public bool CAPEX { get; set; }
+        public int AccountTypeId { get; set; }
+        public string AccountType { get; set; }
         public int GroupId { get; set; }
         public string AccountGroup { get; set; }
         public decimal Amount { get; set; }
@@ -22,6 +22,9 @@ namespace WebAPI.Models
         public string VansId { get; set; } //Id for bulk transaction
         public int TransactionBulkId { get; set; }
         public DateTime Date { get; set; }
-   
+        public string ItemDescription { get; set; }
+        public string InvoiceNumber { get; set; }
+        public decimal Quantity { get; set; }
+
     }
 }

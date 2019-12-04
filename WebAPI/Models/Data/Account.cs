@@ -12,8 +12,8 @@ namespace WebAPI.Models
         public int GroupId { get; set; }
         public string AccountGroup { get; set; }
         public decimal GST { get; set; }
-        public bool Expense { get; set; }
-        public bool CAPEX { get; set; }
+        public int AccountTypeId { get; set; }
+        public string AccountType { get; set; }
 
     }
 }

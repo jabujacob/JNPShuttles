@@ -230,7 +230,7 @@ namespace WebAPI
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
             {
 
-                connection.Execute("[dbo].[InsertAccount] @AccountName, @GroupId, @GST, @Expense, @CAPEX", account);
+                connection.Execute("[dbo].[InsertAccount] @AccountName, @GroupId, @GST, @AccountTypeId", account);
             }
         }
         public void UpdateAccount(Account account)
@@ -238,7 +238,24 @@ namespace WebAPI
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
             {
 
-                connection.Execute("[dbo].[UpdateAccount] @Id,@AccountName, @GroupId, @GST, @Expense, @CAPEX", account);
+                connection.Execute("[dbo].[UpdateAccount] @Id,@AccountName, @GroupId, @GST, @AccountTypeId", account);
+            }
+        }
+
+        public List<AccountType> GetAllAccountTypes()
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
+            {
+                var output = connection.Query<AccountType>("[dbo].[GetAccountTypes]").ToList();
+                return output;
+            }
+        }
+        public AccountType GetAccountType(int id)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
+            {
+                var output = connection.Query<AccountType>("[dbo].[GetAccountTypeById]  @Id", new { Id = id }).FirstOrDefault();
+                return output;
             }
         }
 
@@ -267,7 +284,7 @@ namespace WebAPI
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
             {
 
-                connection.Execute("[dbo].[InsertTransaction] @AccountId, @Amount, @GST,@VanId,@TransactionBulkId,@Date", transaction);
+                connection.Execute("[dbo].[InsertTransaction] @AccountId, @Amount, @GST,@VanId,@TransactionBulkId,@Date,@ItemDescription,@InvoiceNumber,@Quantity", transaction);
             }
         }
         public void InsertTransactionBulk(Transaction transaction)
@@ -275,7 +292,7 @@ namespace WebAPI
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
             {
 
-                connection.Execute("[dbo].[InsertTransactionBulk] @AccountId, @Amount, @GST,@VansId ,@Date", transaction);
+                connection.Execute("[dbo].[InsertTransactionBulk] @AccountId, @Amount, @GST,@VansId ,@Date,@ItemDescription,@InvoiceNumber,@Quantity", transaction);
             }
         }
         public void UpdateTransaction(Transaction transaction)
@@ -283,7 +300,7 @@ namespace WebAPI
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
             {
 
-                connection.Execute("[dbo].[UpdateTransactionById] @Id,@AccountId, @Amount, @GST,@VanId, @Date", transaction);
+                connection.Execute("[dbo].[UpdateTransactionById] @Id,@AccountId, @Amount, @GST,@VanId, @Date,@ItemDescription,@InvoiceNumber,@Quantity", transaction);
             }
         }
 

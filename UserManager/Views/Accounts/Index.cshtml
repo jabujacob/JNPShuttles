@@ -59,7 +59,7 @@
                                     <tr>
                                         <th> @Html.DisplayNameFor(model => model.Id) </th>
                                         <th> @Html.DisplayNameFor(model => model.AccountName) </th>                                                                                              
-                                        <th> @Html.DisplayNameFor(model => model.Expense) </th>                                        
+                                        <th> @Html.DisplayNameFor(model => model.AccountType) </th>                                        
                                         <th> @Html.DisplayNameFor(model => model.GST) </th>
                                     </tr>
                                 </thead>
@@ -135,15 +135,7 @@
                     },
                      
                     {
-                        "data": "Expense", "render": function (data, type, row)
-                        {
-                            if (data == '1') {
-                                return "Yes";
-                            }
-                            else {
-                                return "No";
-                            }                          
-                        },
+                        "data": "AccountType"
                     },
                                  
                     {
@@ -157,6 +149,7 @@
                 ],
                 "dom": "Bfrtip",
                 "buttons": ['copy', 'pdf', 'excel', 'csv'],
+                 "paging": false,
 
 
             });

@@ -189,6 +189,7 @@
       <DependentUpon>201703010648193_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\Driver.cs" />
     <Compile Include="Models\DriverAnalysis.cs" />
     <Compile Include="Models\ReportsViewModal.cs" />

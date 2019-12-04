@@ -53,80 +53,100 @@
                         <div class="box-body">
 
                             <div class="form-group">
-                                
-                                    @Html.LabelFor(model => model.Date)                               
-                                
-                                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control timePicker", @style = "width:200px" } })
-                                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-                                </div>
 
-                                @if (ViewBag.Multiple)
+                                @Html.LabelFor(model => model.Date)
+
+                                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control timePicker", @style = "width:200px" } })
+                                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                            </div>
+
+                            @if (ViewBag.Multiple)
+                            {
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.VanId, new { @class = "" })
+                                    @Html.ListBoxFor(model => model.SelectedVansId, (MultiSelectList)ViewBag.VanList, new { @class = "form-control", id = "vans-id", multiple = "multiple" })
+                                    @Html.ValidationMessageFor(model => model.VansId)
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.VanId, new { @class = "" })
+                                    @Html.DropDownListFor(model => model.VanId, (SelectList)ViewBag.VanList, "Select One", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.VanId)
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.AccountId, new { @class = "" })
+                                @Html.DropDownListFor(model => model.AccountId, (SelectList)ViewBag.accountsList, "Select One", htmlAttributes: new { @class = "form-control", id = "account-id" })
+                                @Html.ValidationMessageFor(model => model.AccountId)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Amount, new { @class = "" })
+                                @Html.TextBoxFor(model => model.Amount, htmlAttributes: new { @class = "form-control", id = "amount-id" })
+                                @Html.ValidationMessageFor(model => model.Amount)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.GST, new { @class = "" })
+                                @Html.TextBoxFor(model => model.GST, new { disabled = "disabled", @class = "form-control", id = "gst-id" })
+                                @Html.ValidationMessageFor(model => model.GST)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ItemDescription, new { @class = "" })
+                                @Html.TextBoxFor(model => model.ItemDescription, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemDescription)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.InvoiceNumber, new { @class = "" })
+                                @Html.TextBoxFor(model => model.InvoiceNumber, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.InvoiceNumber)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Quantity, new { @class = "" })
+                                @Html.TextBoxFor(model => model.Quantity, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Quantity)
+                            </div>
+
+
+
+                            @if (!ViewBag.New)
+                            {
+                                if (Model.TransactionBulkId > 0)
                                 {
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.VanId, new { @class = "" })
-                                        @Html.ListBoxFor(model => model.SelectedVansId, (MultiSelectList)ViewBag.VanList, new { @class = "form-control", id = "vans-id", multiple = "multiple" })
-                                        @Html.ValidationMessageFor(model => model.VansId)
-                                    </div>
+
+                                    @Html.Label("Single Transaction  ")
+                                    <span>No</span>
                                 }
                                 else
                                 {
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.VanId, new { @class = "" })
-                                        @Html.DropDownListFor(model => model.VanId, (SelectList)ViewBag.VanList, "Select One", htmlAttributes: new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.VanId)
+                                    @Html.Label("Single Transaction  ")
+                                    <span>Yes</span>
+                                }
+
+                            }
+
+                            <div class="box-footer">
+                                @*History Back*@
+                                @if (Request.UrlReferrer != null)
+                                {
+                                    <div class="col-md-1">
+                                        <a href=@Request.UrlReferrer class="btn btn-primary">
+                                            <i class="fa fa-home">
+                                                Back
+                                            </i>
+                                        </a>
                                     </div>
                                 }
 
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.AccountId, new { @class = "" })
-                                    @Html.DropDownListFor(model => model.AccountId, (SelectList)ViewBag.accountsList, "Select One", htmlAttributes: new { @class = "form-control", id = "account-id" })
-                                    @Html.ValidationMessageFor(model => model.AccountId)
-                                </div>
+                                <input type="submit" name="submit" value="Save" class="btn btn-primary" />
 
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Amount, new { @class = "" })
-                                    @Html.TextBoxFor(model => model.Amount, htmlAttributes: new { @class = "form-control", id = "amount-id" })
-                                    @Html.ValidationMessageFor(model => model.Amount)
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.GST, new { @class = "" })
-                                    @Html.TextBoxFor(model => model.GST, new { disabled = "disabled", @class = "form-control", id = "gst-id" })
-                                    @Html.ValidationMessageFor(model => model.GST)
-                                </div>
-
-                                @if (!ViewBag.New)
-                                {
-                                    if (Model.TransactionBulkId > 0)
-                                    {
-
-                                        @Html.Label("Single Transaction  ")
-                                        <span>No</span>
-                                    }
-                                    else
-                                    {
-                                        @Html.Label("Single Transaction  ")
-                                        <span>Yes</span>
-                                    }
-
-                                }
-
-                                <div class="box-footer">
-                                    @*History Back*@
-                                    @if (Request.UrlReferrer != null)
-                                    {
-                                        <div class="col-md-1">
-                                            <a href=@Request.UrlReferrer class="btn btn-primary">
-                                                <i class="fa fa-home">
-                                                    Back
-                                                </i>
-                                            </a>
-                                        </div>
-                                    }
-
-                                    <input type="submit" name="submit" value="Save" class="btn btn-primary" />
-
-                                </div>
                             </div>
+                        </div>
                         </div>
                 </div>
             </div>

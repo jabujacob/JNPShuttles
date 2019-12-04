@@ -49,8 +49,8 @@ namespace JNPPortal.Controllers
             {
                 ViewBag.Title = "Create new Account";
                 ViewBag.New = true;
-
-
+                account.AccountTypeId = 1;
+                account.GST = Convert.ToDecimal(0.15);
             }          
 
             else
@@ -60,9 +60,17 @@ namespace JNPPortal.Controllers
                 account = response.Content.ReadAsAsync<Account>().Result;
 
                 ViewBag.Title = "Account - " + id.ToString();
-                ViewBag.New = false;                
+                ViewBag.New = false;
+
+                
             }
-            
+
+            //Get Account Types List
+            IEnumerable<AccountType> accountTypesList;
+            HttpResponseMessage accountsListResponse = GlobalVariables.WebApiClient.GetAsync("api/AccountTypes").Result;
+            accountTypesList = accountsListResponse.Content.ReadAsAsync<IEnumerable<AccountType>>().Result;
+            ViewBag.AccountTypesList = new SelectList(accountTypesList, "Id", "Value", "Select One");
+
             return View(account);
         }
 
