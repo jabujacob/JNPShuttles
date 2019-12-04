@@ -39,6 +39,8 @@ namespace JNPPortal.Controllers
 
                 //New user
                 Driver driver = new Driver();
+                driver.DriverShare1 = Convert.ToDecimal(.8);
+                driver.DriverShare2 = Convert.ToDecimal(.5);
 
                 return View(driver);
             }

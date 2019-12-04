@@ -1,4 +1,4 @@
-@model JNPPortal.Models.User
+﻿@model JNPPortal.Models.Account
 
 @{
 
@@ -24,7 +24,16 @@
             <div class="col-xs-12">
                 <div class="box box-solid box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Edit User</h3>
+
+                        @if (ViewBag.New)
+                        {
+                            <h3 class="box-title">Add Account</h3>                           
+                        }
+                        else
+                        {                    
+                            <h3 class="box-title">Edit Account</h3>
+                        }
+
                     </div><!-- /.box-header -->
 
                     <div class="alert alert-success alert-dismissable" id="dvMsgUser" style="display:none;">
@@ -37,40 +46,23 @@
                         <div class="box-body">
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Username, new { @class = "" })
-                                @Html.EditorFor(model => model.Username) @Html.ValidationMessageFor(model => model.Username)
+                                @Html.LabelFor(model => model.AccountName, new { @class = "" })
+                                @Html.TextBoxFor(model => model.AccountName, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.AccountName)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.GST, new { @class = "" })
+                                @Html.TextBoxFor(model => model.GST, new { @class = "form-control", id = "gst-id" })
+                                @Html.ValidationMessageFor(model => model.GST)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Expense, new { @class = "" })
+                                @Html.EditorFor(model => model.Expense, new { @class = "form-control", id = "expense-id" })
+                                @Html.ValidationMessageFor(model => model.Expense)
                             </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Password, new { @class = "" })
-                                @Html.EditorFor(model => model.Password) @Html.ValidationMessageFor(model => model.Password)
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.FirstName, new { @class = "" })
-                                @Html.EditorFor(model => model.FirstName) @Html.ValidationMessageFor(model => model.FirstName)
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.LastName, new { @class = "" })
-                                @Html.EditorFor(model => model.LastName) @Html.ValidationMessageFor(model => model.LastName)
-                            </div>
-                     
-                       
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.DriverId, new { @class = "" })
-                            @Html.DropDownListFor(model => model.DriverId, (SelectList)ViewBag.DriverList, "Select One", htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.DriverId, "", new { @class = "text-danger" })
-                        </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Admin, new { @class = "" })
-                                @Html.EditorFor(model => model.Admin) @Html.ValidationMessageFor(model => model.Admin)
-                            </div>
 
                             <div class="box-footer">
-
-
                                 @*History Back*@
                                 @if (Request.UrlReferrer != null)
                                 {
@@ -94,16 +86,3 @@
     </section>
 
 }
-
-
-<script>
-    $(function () {
-        $("#roles-multiselect").chosen();
-        width: "100%"
-
-    });
-</script>
-
-
-
-

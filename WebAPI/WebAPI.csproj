@@ -165,6 +165,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\DriverAnalysisDetailsController.cs" />
     <Compile Include="Controllers\DriverAnalysisMonthlySummaryController.cs" />
     <Compile Include="Controllers\DriverAnalysisSummaryController.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Controllers\TripSheetEntryStatusController.cs" />
     <Compile Include="Controllers\TripSheetsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -182,11 +184,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
+    <Compile Include="Models\Data\Account.cs" />
     <Compile Include="Models\Data\Driver.cs" />
     <Compile Include="Models\Data\DriverAnalysis.cs" />
     <Compile Include="Models\Data\MenuPermission.cs" />
     <Compile Include="Models\Data\Task.cs" />
     <Compile Include="Models\Data\TaskSuperShuttle.cs" />
+    <Compile Include="Models\Data\Transaction.cs" />
     <Compile Include="Models\Data\User.cs" />
     <Compile Include="Models\Data\TripSheet.cs" />
     <Compile Include="Models\Data\Van.cs" />

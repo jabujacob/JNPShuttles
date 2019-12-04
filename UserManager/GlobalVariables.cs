@@ -11,12 +11,10 @@ namespace JNPPortal
 {
     public class GlobalVariables
     {
-
         public static HttpClient WebApiClient = new HttpClient();
         public const SslProtocols _Tls12 = (SslProtocols)0x00000C00;
         public const SecurityProtocolType Tls12 = (SecurityProtocolType)_Tls12; 
-
-
+        
         static GlobalVariables()
         {
             ServicePointManager.SecurityProtocol = Tls12;
@@ -24,7 +22,7 @@ namespace JNPPortal
 
 
             WebApiClient.BaseAddress = new Uri("https://api.jnpshuttles.com/");
-            //WebApiClient.BaseAddress = new Uri("http://localhost:64501/api");           
+            WebApiClient.BaseAddress = new Uri("http://localhost:64501/api");           
 
             WebApiClient.DefaultRequestHeaders.Clear();
             WebApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

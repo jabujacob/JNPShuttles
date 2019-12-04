@@ -1,0 +1,202 @@
+﻿@model IEnumerable<JNPPortal.Models.Transaction>
+
+@{
+    ViewBag.Title = "Transactions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section ScriptsOrCss
+{
+
+    <link href="~/Content/DataTable/new/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/DataTable/new/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/dataTables.buttons.min.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/jszip.min.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/pdfmake.min.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/vfs_fonts.js" type="text/javascript"></script>
+    <script src="~/Content/DataTable/new/buttons.html5.min.js" type="text/javascript"></script>
+    <link href="~/Content/DataTable/new/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/DataTable/new/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+
+}
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+        <small> @ViewBag.Title</small>
+    </h1>
+</section>
+
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-solid box-primary">
+
+                <div class="box-body">
+                    <!-- Split button -->
+                    <div class="margin">
+
+                        <div class="btn-group">
+                            <a href="@Url.Action("AddorEdit","Transactions")" class="btn btn-primary">Create Single</a>
+                        </div>
+                        <div class="btn-group">
+                            <a href="@Url.Action("AddorEdit/-1","Transactions")" class="btn btn-primary">Create Multiple</a>
+                        </div>
+                    </div>
+                    <!-- flat split buttons -->
+                </div><!-- /.box-body -->
+            </div>
+            <div class="box box-solid box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">@ViewBag.Title</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive">
+
+                    <div class="margin">
+
+                        <div class="streaming-table">
+                            <span id="found" class="label label-info"></span>
+
+
+                            <table id="tbTransactions" class="display nowrap">
+                                <thead>
+                                    <tr>
+                                        <th> @Html.DisplayNameFor(model => model.Id) </th>
+                                        <th> @Html.DisplayNameFor(model => model.Date) </th>
+                                        <th> @Html.DisplayNameFor(model => model.Account) </th>
+                                        <th> @Html.DisplayNameFor(model => model.Van) </th>
+                                        <th> @Html.DisplayNameFor(model => model.Expense) </th>
+                                        <th> @Html.DisplayNameFor(model => model.Amount) </th>
+                                        <th> @Html.DisplayNameFor(model => model.GST) </th>
+                                        <th> Net</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            <div id="summary">
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-solid box-primary">
+
+                <div class="box-body">
+                    <!-- Split button -->
+                    <div class="margin">
+
+                        <div class="btn-group">
+                            <a href="@Url.Action("AddorEdit","Transactions")" class="btn btn-primary">Create</a>
+                        </div>
+                        <div class="btn-group">
+                            <a href="@Url.Action("AddorEdit/-1","Transactions")" class="btn btn-primary">Create Multiple</a>
+                        </div>
+                    </div>
+                    <!-- flat split buttons -->
+                </div><!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+
+         function convertToDate(data)
+        {
+            // The 6th+ positions contain the number of milliseconds in Universal Coordinated Time between the specified date and midnight January 1, 1970.
+            var dtStart = new Date(parseInt(data.substr(6)));
+            // Format using moment.js.
+            var dtStartWrapper = moment(dtStart);
+            return dtStartWrapper.format("DD/MMM/YYYY");
+        }
+
+
+         $(document).ready(function () {
+
+
+        $("#tbTransactions").dataTable(
+
+            {
+                "ajax": {
+
+                    "url": "/Transactions/GetGrid",
+                    "type": "GET",
+                    "dataType": "json"
+                },
+
+                "columns": [
+                    {
+                        "data": "Id", "render": function  (data)
+                        {
+                            return "<a href = '@Url.Action("AddorEdit","Transactions")/" + data + "')>" + data + "</a>";
+                        },
+
+                    },
+                    {
+                        "data": "Date"
+                        // ,"render":  function(data, type, full) {
+
+                        //    return (data) ? moment(data).format('DD/MM/YYYY') : '';
+
+                        //}
+                         ,
+                        "render": function (value) {
+                                if (value === null) return "";
+                                var pattern = /Date\(([^)]+)\)/;//date format from server side
+                                var results = pattern.exec(value);
+                                var dt = new Date(parseFloat(results[1]));
+
+                                return dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
+                            }
+                    },
+                    {
+                        "data": "Account", "render": function (data,type,row)
+                        {
+                            return "<a href = '@Url.Action("AddorEdit","Transactions")/" + row['Id'] + "')>" +  data + "</a>";
+                        },
+                    },
+                     {
+                        "data": "Van"
+                    },   
+                    {
+                        "data": "Expense", "render": function (data, type, row)
+                        {
+                            if (data == '1') {
+                                return "Yes";
+                            }
+                            else {
+                                return "No";
+                            }                          
+                        },
+                    },
+                    
+                    
+                    {
+                        "data": "Amount"
+                    },
+                    {
+                        "data": "GST"
+                    },
+                    {
+                        "data": "Net"
+                    },
+                                   
+
+                ],
+                "dom": "Bfrtip",
+                "buttons": ['copy', 'pdf', 'excel', 'csv'],
+                "order": [[ 0, "desc" ]]
+
+
+            });
+         });
+
+
+
+</script>
+

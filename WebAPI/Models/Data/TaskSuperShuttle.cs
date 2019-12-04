@@ -30,7 +30,7 @@ namespace WebAPI.Models
         string run;
         string serviceType;
         string totalFare;
-
+        
         public string AccountName { get => accountName; set => accountName = value; }
         
         public string TaskID { get => taskID; set => taskID = value; }
@@ -52,9 +52,8 @@ namespace WebAPI.Models
         public string DriverID { get => driverID; set => driverID = value; }
         public string Run { get => run; set => run = value; }
         public string TotalFare { get => totalFare; set => totalFare = value; }
+        public string APIParameter { get; set; }
 
-        
-        
     }
 
 

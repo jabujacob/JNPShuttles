@@ -95,6 +95,22 @@ namespace JNPPortal.Controllers
 
             sb.Append("</ul>");
 
+            //Accounts Management Header
+            x = "<li class=\"treeview\"> <a href=\"#\"> <i class=\"fa fa-folder\"></i> <span>Accounts</span> <i class=\"fa fa-angle-left pull-right\"></i>  </a><ul class=\"treeview-menu\">";
+            sb.Append(x);
+
+            //Transactions
+            x = "<li class=\"\"> <a href=\"/Transactions\"><i class=\"fa fa-angle-double-right\"></i>Show Transactions</a></li>";
+            sb.Append(x);
+
+            //Accounts
+            x = "<li class=\"\"> <a href=\"/Accounts\"><i class=\"fa fa-angle-double-right\"></i>Show Accounts</a></li>";
+            sb.Append(x);
+
+            sb.Append("</ul>");
+
+
+
             //Organisation
             x = "<li class=\"treeview\"> <a href=\"#\"> <i class=\"fa fa-folder\"></i> <span>Organisation</span> <i class=\"fa fa-angle-left pull-right\"></i>  </a><ul class=\"treeview-menu\">";
             sb.Append(x);

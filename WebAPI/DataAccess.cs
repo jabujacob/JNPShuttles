@@ -136,7 +136,7 @@ namespace WebAPI
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
             {
-                connection.Execute("[dbo].[InsertTask] @AccountName ,@BookingId ,@TaskId ,@DispatchStatus ,@DropOffAddress ,@Pax  ,@FareType ,@PaymentType ,@PickupAddress ,@pickupTime  ,@RetailFare ,@ServiceTime ,@TravellerSurname ,@VehicleNumber ,@AirportFee ,@Bbucode ,@DriverId ,@Run ,@ServiceType ,@TotalFare ,@ImportDate,@Fee", task);
+                connection.Execute("[dbo].[InsertTask] @AccountName ,@BookingId ,@TaskId ,@DispatchStatus ,@DropOffAddress ,@Pax  ,@FareType ,@PaymentType ,@PickupAddress ,@pickupTime  ,@RetailFare ,@ServiceTime ,@TravellerSurname ,@VehicleNumber ,@AirportFee ,@Bbucode ,@DriverId ,@Run ,@ServiceType ,@TotalFare ,@ImportDate,@Fee,@APIParameter", task);
             }
         }
 
@@ -206,6 +206,88 @@ namespace WebAPI
 
         #endregion
 
+
+        #region Account
+        public List<Account> GetAllAccounts()
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
+            {
+                var output = connection.Query<Account>("[dbo].[GetAccounts]").ToList();
+                return output;
+            }
+        }
+
+        public Account GetAccount(int id)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
+            {
+                var output = connection.Query<Account>("[dbo].[GetAccountById]  @Id", new { Id = id }).FirstOrDefault();
+                return output;
+            }
+        }
+        public void InsertAccount(Account account)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
+            {
+
+                connection.Execute("[dbo].[InsertAccount] @AccountName, @GroupId, @GST, @Expense, @CAPEX", account);
+            }
+        }
+        public void UpdateAccount(Account account)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
+            {
+
+                connection.Execute("[dbo].[UpdateAccount] @Id,@AccountName, @GroupId, @GST, @Expense, @CAPEX", account);
+            }
+        }
+
+        #endregion
+
+        #region Transaction
+        public List<Transaction> GetAllTransactions()
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
+            {
+                var output = connection.Query<Transaction>("[dbo].[GetTransactions]").ToList();
+                return output;
+            }
+        }
+
+        public Transaction GetTransaction(int id)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
+            {
+                var output = connection.Query<Transaction>("[dbo].[GetTransactionById]  @Id", new { Id = id }).FirstOrDefault();
+                return output;
+            }
+        }
+        public void InsertTransaction(Transaction transaction)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
+            {
+
+                connection.Execute("[dbo].[InsertTransaction] @AccountId, @Amount, @GST,@VanId,@TransactionBulkId,@Date", transaction);
+            }
+        }
+        public void InsertTransactionBulk(Transaction transaction)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
+            {
+
+                connection.Execute("[dbo].[InsertTransactionBulk] @AccountId, @Amount, @GST,@VansId ,@Date", transaction);
+            }
+        }
+        public void UpdateTransaction(Transaction transaction)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("JNPDB")))
+            {
+
+                connection.Execute("[dbo].[UpdateTransactionById] @Id,@AccountId, @Amount, @GST,@VanId, @Date", transaction);
+            }
+        }
+
+        #endregion
 
         #region General
         public List<MenuPermission> GetMenuPermissions(int userId)

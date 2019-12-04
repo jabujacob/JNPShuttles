@@ -43,5 +43,6 @@ namespace WebAPI.Models
         public string TotalFare { get; set; }
         public decimal DCTotalFare { get; set; }
         public DateTime ImportDate { get; set; }
+        public string APIParameter { get; set; }
     }
 }

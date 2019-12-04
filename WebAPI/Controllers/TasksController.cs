@@ -37,9 +37,8 @@ namespace WebAPI.Controllers
 
             //Get Last Import Date from DB
 
-            DateTime dtStartTime = db.GetLastImportTime().AddDays(-1);
-            DateTime dtEndTime = DateTime.Now.AddDays(1);
-
+            DateTime dtStartTime = db.GetLastImportTime().Date.AddDays(-4);            
+            DateTime dtEndTime = DateTime.Now.Date.AddDays(1);
 
             int noOfDays = ((TimeSpan)(dtEndTime - dtStartTime)).Days;
 
@@ -111,7 +110,8 @@ namespace WebAPI.Controllers
                     Run = taskCollection.Tasks[i].Run,
                     ServiceType = taskCollection.Tasks[i].ServiceType,
                     TotalFare = taskCollection.Tasks[i].TotalFare,
-                    ImportDate = importDateTime
+                    ImportDate = importDateTime,
+                    APIParameter = taskCollection.Tasks[i].APIParameter
                 };
 
                 db.InsertTask(myDBTask);
@@ -176,7 +176,8 @@ namespace WebAPI.Controllers
             requestObject.Method = "POST";
 
             string postData = String.Concat("{\"fromDateInclusive\":\"/Date(", strEpochStartTimeDayLightSaving, ")/\",\"toDateInclusive\":\"/Date(", strEpochEndTimeDayLightSaving, ")/\"}");
-            //db1.InsertErrorLog(postData, string.Concat(StartTime.ToString(), " - ", endTime.ToString()));
+            //db.InsertErrorLog(postData, string.Concat(StartTime.ToString(), " - ", endTime.ToString()));
+            
 
             using (var streamWriter = new StreamWriter(requestObject.GetRequestStream()))
             {
@@ -196,6 +197,12 @@ namespace WebAPI.Controllers
                     var result = streamReader.ReadToEnd();
 
                     TaskCollection taskList = JsonConvert.DeserializeObject<TaskCollection>(result);
+
+                    int taskcount = taskList.Tasks.Count;
+                    for(int i=0;i<taskcount;i++ )
+                    {
+                        taskList.Tasks[i].APIParameter = postData;
+                    }
 
                     return taskList;
                 }

@@ -170,11 +170,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\DriversController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\SiMenuBarController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Controllers\TripSheetsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -186,12 +188,14 @@
     <Compile Include="Migrations\201703010648193_initial.Designer.cs">
       <DependentUpon>201703010648193_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Driver.cs" />
     <Compile Include="Models\DriverAnalysis.cs" />
     <Compile Include="Models\ReportsViewModal.cs" />
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\MenuPermission.cs" />
     <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\Tripsheet.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Van.cs" />
@@ -1624,6 +1628,10 @@
     <Content Include="Views\Drivers\Index.cshtml" />
     <Content Include="Views\Drivers\AddOrEdit.cshtml" />
     <Content Include="Views\Reports\DriverAnalysisMonthlySummary.cshtml" />
+    <Content Include="Views\Transactions\Index.cshtml" />
+    <Content Include="Views\Transactions\AddOrEdit.cshtml" />
+    <Content Include="Views\Accounts\Index.cshtml" />
+    <Content Include="Views\Accounts\AddOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
