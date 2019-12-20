@@ -19,7 +19,7 @@ namespace JNPPortal.Controllers
                 ReportsViewModal rvm = new ReportsViewModal();
 
                 rvm.StartDate = Convert.ToDateTime(DateTime.Now.AddDays(-2));
-                rvm.EndDate = Convert.ToDateTime(DateTime.Now);
+                rvm.EndDate = Convert.ToDateTime(DateTime.Now.AddDays(1));
                 rvm.DriverId = -1;
 
                 ViewBag.StartDate = HttpUtility.UrlEncode(String.Format("{0:dd/MMM/yyyy}", rvm.StartDate));
