@@ -55,7 +55,16 @@ namespace WebAPI.Controllers
                     TaskCollection taskCollection1 = GetTaskListFromSuperShuttle(dtStartTime.AddDays(i), dtStartTime.AddDays(i + 1).AddMilliseconds(-1));
                     if (taskCollection1.Tasks != null)
                     {
-                        taskCollection.Tasks.AddRange(taskCollection1.Tasks.ToList());
+
+                        if (taskCollection.Tasks == null)
+                        {
+                            taskCollection = taskCollection1;
+                        }
+                        else
+                        {
+                            taskCollection.Tasks.AddRange(taskCollection1.Tasks.ToList());
+                        }
+                        
                     }
                     
                 }
