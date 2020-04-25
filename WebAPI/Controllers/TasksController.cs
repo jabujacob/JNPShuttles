@@ -197,13 +197,16 @@ namespace WebAPI.Controllers
                     var result = streamReader.ReadToEnd();
 
                     TaskCollection taskList = JsonConvert.DeserializeObject<TaskCollection>(result);
-
-                    int taskcount = taskList.Tasks.Count;
-                    for(int i=0;i<taskcount;i++ )
-                    {
-                        taskList.Tasks[i].APIParameter = postData;
+                    if (taskList != null) {
+                        if (taskList.Tasks != null)
+                        {
+                            int taskcount = taskList.Tasks.Count;
+                            for (int i = 0; i < taskcount; i++)
+                            {
+                                taskList.Tasks[i].APIParameter = postData;
+                            }
+                        }
                     }
-
                     return taskList;
                 }
             }
