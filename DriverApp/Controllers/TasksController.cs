@@ -63,7 +63,8 @@ namespace JNPShuttle.Controllers
         public TaskCollection GetTaskListFromSuperShuttle(DateTime StartTime, DateTime endTime)
         {
 
-            string strURL = string.Format("https://www.tourismtransport.com:8443/v7/superservicerest.svc/v1/gettasksbytimerangeonaccounts");
+            //string strURL = string.Format("https://www.tourismtransport.com:8443/v7/superservicerest.svc/v1/gettasksbytimerangeonaccounts");
+            string strURL = string.Format("https://supershuttle.co.nz/api/v7/superservicerest.svc/v1/gettasksbytimerangeonaccounts");
             System.Net.WebRequest requestObject = WebRequest.Create(strURL);
 
             long epochStartTime = Helper.ToEpoch(StartTime);

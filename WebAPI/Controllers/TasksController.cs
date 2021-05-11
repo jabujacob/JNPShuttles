@@ -136,7 +136,8 @@ namespace WebAPI.Controllers
         private TaskCollection GetTaskListFromSuperShuttle(DateTime StartTime, DateTime endTime)
         {
 
-            string strURL = string.Format("https://www.tourismtransport.com:8443/v7/superservicerest.svc/v1/gettasksbytimerangeonaccounts");
+            //string strURL = string.Format("https://www.tourismtransport.com:8443/v7/superservicerest.svc/v1/gettasksbytimerangeonaccounts");
+            string strURL = string.Format("https://supershuttle.co.nz/api/v7/superservicerest.svc/v1/gettasksbytimerangeonaccounts");
             System.Net.WebRequest requestObject = WebRequest.Create(strURL);
 
             long epochStartTime = Helper.ToEpoch(StartTime);
@@ -172,21 +173,15 @@ namespace WebAPI.Controllers
                 strEpochEndTimeDayLightSaving = String.Concat(epochEndTime.ToString(), "+1200");
             }
 
-
             requestObject.ContentType = "application/json";
-
 
             // For Basic Authentication
             string authInfo = "philipkuruvilla@hotmail.com" + ":" + "philipkuruvillahasseveralvans";
             authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
             requestObject.Headers["Authorization"] = "Basic " + authInfo;
-
-
             requestObject.Method = "POST";
-
             string postData = String.Concat("{\"fromDateInclusive\":\"/Date(", strEpochStartTimeDayLightSaving, ")/\",\"toDateInclusive\":\"/Date(", strEpochEndTimeDayLightSaving, ")/\"}");
-            //db.InsertErrorLog(postData, string.Concat(StartTime.ToString(), " - ", endTime.ToString()));
-            
+            //db.InsertErrorLog(postData, string.Concat(StartTime.ToString(), " - ", endTime.ToString()));          
 
             using (var streamWriter = new StreamWriter(requestObject.GetRequestStream()))
             {
@@ -194,7 +189,6 @@ namespace WebAPI.Controllers
                 streamWriter.Write(postData);
                 streamWriter.Flush();
                 streamWriter.Close();
-
 
                 var httpResponse = (HttpWebResponse)requestObject.GetResponse();
 
